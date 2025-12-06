@@ -1,7 +1,6 @@
 import {Toaster,} from 'sonner' // hiên thị thông báo
 import {BrowserRouter, Routes, Route} from 'react-router'
 import HomeLayout from "./Layout/HomeLayout"
-import './App.css'
 
 function App() {
 
@@ -15,7 +14,6 @@ function App() {
                   />
               </Routes>
           </BrowserRouter>
-          )
       </>
   )
 }
