@@ -1,12 +1,12 @@
 import HeadHome from "./HeadHome.tsx";
 import FooterHome from "./FooterHome";
-import Poster from "../../pages/HomePage/Poster.tsx";
+import Banner from "./Banner.tsx";
 
 const HomeLayout = () =>{
     return (
         <>
             <HeadHome/>
-            <Poster/>
+            <Banner/>
             <FooterHome/>
         </>
     )
