@@ -1,6 +1,9 @@
 @import "tailwindcss";
 /* Reset CSS cải tiến */
 
+*{
+
+}
 
 .container{
     width: 1146px;
