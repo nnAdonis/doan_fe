@@ -3,9 +3,58 @@
 
 
 .container{
-    width: 980px;
+    width: 1100px;
     padding: 0 12px;
     margin-left: auto;
     margin-right: auto;
+}
+a:hover {
+    color: #c31e40;
+}
+.article-content {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #111;
+}
+
+/* ĐOẠN VĂN */
+.article-content p {
+    margin: 16px 0;
+}
+
+/* TIÊU ĐỀ TRONG BÀI */
+.article-content h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 24px 0 12px;
+}
+
+/* HÌNH ẢNH */
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 16px auto;
+    border-radius: 6px;
+}
+
+/* CHÚ THÍCH ẢNH */
+.article-content .caption {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-top: 6px;
+}
+
+/* LINK */
+.article-content a {
+    color: #c31e40;
+    font-weight: 600;
+}
+
+/* TABLE ẢNH */
+.article-content table {
+    width: 100%;
+    margin: 16px 0;
 }
 
