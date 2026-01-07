@@ -18,7 +18,11 @@ export default function Banner() {
     }, [images.length]);
 
     return (
+<<<<<<< HEAD
         <div className="w-full h-64 ">
+=======
+        <div className="w-245 items-center ml-auto mr-auto h-24 mt-4 mb-4 ">
+>>>>>>> f75a30e4a261d2fb3495aaea538240b29ac2fcac
             <img
                 src={images[index]}
                 alt="banner"
@@ -26,4 +30,8 @@ export default function Banner() {
             />
         </div>
     );
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> f75a30e4a261d2fb3495aaea538240b29ac2fcac
