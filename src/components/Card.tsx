@@ -1,16 +1,29 @@
-import StoryThumb from "./StoryThumb.tsx";
-
-const Card = () =>{
-    return(
-        <>
-            <a className={``}>
-                <div className={`max-w-80 m-h-45`}>
-                    <StoryThumb/>
-                </div>
-                <p className={`font-medium max-w-77`}>Đột phá đầu tư để hình thành đại học xuất sắc</p>
-            </a>
-        </>
-    )
-}
-
-export default Card;
+// import StoryThumb from "./StoryThumb.tsx";
+// import Story from "./Story.tsx";
+//
+// const Card = () =>{
+//     interface StoryData {
+//         title: string;
+//         time: string;
+//         description: string;
+//     }
+//     const stories: StoryData[] = [
+//         {
+//             title: "Trả lại vai trò cho bộ môn",
+//             time: "8 giờ trước",
+//             description: "GD&TĐ - Theo các chuyên gia..."
+//         }
+//     ];
+//     return(
+//         <>
+//             <a className={``}>
+//                 <div className={`max-w-80 m-h-45`}>
+//                     <StoryThumb/>
+//                 </div>
+//                 <Story data={}/>
+//             </a>
+//         </>
+//     )
+// }
+//
+// export default Card;

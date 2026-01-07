@@ -18,7 +18,7 @@ export default function Banner() {
     }, [images.length]);
 
     return (
-        <div className="w-245 items-center ml-auto mr-auto h-24 mt-4 mb-4 ">
+        <div className="w-245 items-center ml-auto mr-auto h-24 mt-4 mb-8 ">
             <img
                 src={images[index]}
                 alt="banner"
