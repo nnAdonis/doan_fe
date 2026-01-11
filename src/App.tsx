@@ -4,13 +4,17 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomeLayout from "./Layout/HomeLayout";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
+import Topic from "./pages/Topic";
 import Category from "./pages/Category";
+import ScrollToTop from "./components/ScrollToTop";
+import "./assets/css/hot-news.css";
 
 function App() {
     return (
         <>
             <Toaster />
             <BrowserRouter>
+                <ScrollToTop />
                 <Routes>
                     <Route path="/" element={<HomeLayout />}>
                         {/* Trang chủ */}
@@ -21,6 +25,9 @@ function App() {
 
                         {/* Trang danh mục */}
                         <Route path="category/:slug" element={<Category />} />
+
+                        <Route path="/chu-de" element={<Topic />} />
+
                     </Route>
                 </Routes>
             </BrowserRouter>
