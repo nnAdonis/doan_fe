@@ -1,0 +1,69 @@
+.article-content {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #111;
+}
+
+/* PARAGRAPH */
+.article-content p {
+    margin: 16px 0;
+}
+
+/* HEADING */
+.article-content h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 28px 0 14px;
+}
+
+/* IMAGE TABLE */
+.article-content table.picture {
+    width: 100%;
+    margin: 20px auto;
+    border-collapse: collapse;
+}
+
+.article-content table.picture img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+/* CAPTION */
+.article-content table.picture .caption {
+    font-size: 14px;
+    color: #555;
+    text-align: center;
+    padding-top: 6px;
+}
+
+/* NORMAL IMG */
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 16px auto;
+}
+
+/* LINK */
+.article-content a {
+    color: #c31e40;
+    font-weight: 600;
+}
+
+.article-body img {
+    max-width: 100%;
+    height: auto;
+}
+
+.article-body figure {
+    margin: 24px auto;
+    text-align: center;
+}
+
+.article-body figcaption {
+    font-size: 14px;
+    color: #666;
+    margin-top: 6px;
+}
