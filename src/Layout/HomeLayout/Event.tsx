@@ -11,25 +11,25 @@ const Event = () =>{
     const ImgChinh: ImgData[] = [
         {
             link: "#",
-            src: "https://cdn.giaoducthoidai.vn/images/5866a67bcdeb3affeba9d430e8d8f5f95c0f27129eeb730ac4b7d96351be97b3e78b71cec42b35ed564305a334f0be7a8baea75b08e157ee24eff66008afb2d9/loat-hiep-si-bi-khoi-to-1.jpg.webp",
+            src: "https://cdn.giaoducthoidai.vn/images/212fc329b6cfb1e067b8c88076072f838e0fb9ab7ce9a5f295cea920651e3b389225290b8b5a41c6425f891fe07ae05b/1.jpg.webp",
         }
     ]
     const ImgPhu: ImgData[] = [
         {
             link: "#",
-            src: "https://cdn.giaoducthoidai.vn/images/5866a67bcdeb3affeba9d430e8d8f5f95c0f27129eeb730ac4b7d96351be97b3e78b71cec42b35ed564305a334f0be7a8baea75b08e157ee24eff66008afb2d9/loat-hiep-si-bi-khoi-to-1.jpg.webp",
+            src: "https://cdn.giaoducthoidai.vn/images/212fc329b6cfb1e067b8c88076072f838e0fb9ab7ce9a5f295cea920651e3b389225290b8b5a41c6425f891fe07ae05b/1.jpg.webp",
         },
         {
             link: "#",
-            src: "https://cdn.giaoducthoidai.vn/images/5866a67bcdeb3affeba9d430e8d8f5f95c0f27129eeb730ac4b7d96351be97b3e78b71cec42b35ed564305a334f0be7a8baea75b08e157ee24eff66008afb2d9/loat-hiep-si-bi-khoi-to-1.jpg.webp",
+            src: "https://cdn.giaoducthoidai.vn/images/212fc329b6cfb1e067b8c88076072f838e0fb9ab7ce9a5f295cea920651e3b389225290b8b5a41c6425f891fe07ae05b/1.jpg.webp",
         },
         {
             link: "#",
-            src: "https://cdn.giaoducthoidai.vn/images/5866a67bcdeb3affeba9d430e8d8f5f95c0f27129eeb730ac4b7d96351be97b3e78b71cec42b35ed564305a334f0be7a8baea75b08e157ee24eff66008afb2d9/loat-hiep-si-bi-khoi-to-1.jpg.webp",
+            src: "https://cdn.giaoducthoidai.vn/images/212fc329b6cfb1e067b8c88076072f838e0fb9ab7ce9a5f295cea920651e3b389225290b8b5a41c6425f891fe07ae05b/1.jpg.webp",
         },
         {
             link: "#",
-            src: "https://cdn.giaoducthoidai.vn/images/5866a67bcdeb3affeba9d430e8d8f5f95c0f27129eeb730ac4b7d96351be97b3e78b71cec42b35ed564305a334f0be7a8baea75b08e157ee24eff66008afb2d9/loat-hiep-si-bi-khoi-to-1.jpg.webp",
+            src: "https://cdn.giaoducthoidai.vn/images/212fc329b6cfb1e067b8c88076072f838e0fb9ab7ce9a5f295cea920651e3b389225290b8b5a41c6425f891fe07ae05b/1.jpg.webp",
         }
     ]
 
@@ -90,7 +90,6 @@ const Event = () =>{
                             ))}
                             {titlePhu.map((story, index) => (
                                 <a href="">
-
                                     <Story key={index} data={story} />
                                 </a>
                             ))}

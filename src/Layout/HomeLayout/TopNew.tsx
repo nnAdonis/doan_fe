@@ -13,25 +13,25 @@ const TopNew = ()=>{
     const ImgChinh: ImgData[] = [
         {
             link: "#",
-            src: "https://cdn.giaoducthoidai.vn/images/5866a67bcdeb3affeba9d430e8d8f5f95c0f27129eeb730ac4b7d96351be97b3e78b71cec42b35ed564305a334f0be7a8baea75b08e157ee24eff66008afb2d9/loat-hiep-si-bi-khoi-to-1.jpg.webp",
+            src: "https://cdn.giaoducthoidai.vn/images/212fc329b6cfb1e067b8c88076072f838e0fb9ab7ce9a5f295cea920651e3b389225290b8b5a41c6425f891fe07ae05b/1.jpg.webp",
         }
     ]
     const ImgPhu: ImgData[] = [
         {
             link: "#",
-            src: "https://cdn.giaoducthoidai.vn/images/5866a67bcdeb3affeba9d430e8d8f5f95c0f27129eeb730ac4b7d96351be97b3e78b71cec42b35ed564305a334f0be7a8baea75b08e157ee24eff66008afb2d9/loat-hiep-si-bi-khoi-to-1.jpg.webp",
+            src: "https://cdn.giaoducthoidai.vn/images/212fc329b6cfb1e067b8c88076072f838e0fb9ab7ce9a5f295cea920651e3b389225290b8b5a41c6425f891fe07ae05b/1.jpg.webp",
         },
         {
             link: "#",
-            src: "https://cdn.giaoducthoidai.vn/images/5866a67bcdeb3affeba9d430e8d8f5f95c0f27129eeb730ac4b7d96351be97b3e78b71cec42b35ed564305a334f0be7a8baea75b08e157ee24eff66008afb2d9/loat-hiep-si-bi-khoi-to-1.jpg.webp",
+            src: "https://cdn.giaoducthoidai.vn/images/212fc329b6cfb1e067b8c88076072f838e0fb9ab7ce9a5f295cea920651e3b389225290b8b5a41c6425f891fe07ae05b/1.jpg.webp",
         },
         {
             link: "#",
-            src: "https://cdn.giaoducthoidai.vn/images/5866a67bcdeb3affeba9d430e8d8f5f95c0f27129eeb730ac4b7d96351be97b3e78b71cec42b35ed564305a334f0be7a8baea75b08e157ee24eff66008afb2d9/loat-hiep-si-bi-khoi-to-1.jpg.webp",
+            src: "https://cdn.giaoducthoidai.vn/images/212fc329b6cfb1e067b8c88076072f838e0fb9ab7ce9a5f295cea920651e3b389225290b8b5a41c6425f891fe07ae05b/1.jpg.webp",
         },
         {
             link: "#",
-            src: "https://cdn.giaoducthoidai.vn/images/5866a67bcdeb3affeba9d430e8d8f5f95c0f27129eeb730ac4b7d96351be97b3e78b71cec42b35ed564305a334f0be7a8baea75b08e157ee24eff66008afb2d9/loat-hiep-si-bi-khoi-to-1.jpg.webp",
+            src: "https://cdn.giaoducthoidai.vn/images/212fc329b6cfb1e067b8c88076072f838e0fb9ab7ce9a5f295cea920651e3b389225290b8b5a41c6425f891fe07ae05b/1.jpg.webp",
         }
     ]
     interface StoryData {
@@ -43,7 +43,7 @@ const TopNew = ()=>{
         {
             title: "Trả lại vai trò cho bộ môn",
             time: "8 giờ trước",
-            description: "GD&TĐ - Theo các chuyên gia..."
+            description: "GD&TĐ - Nhìn lại chặng đường từ Đại hội XIII, kết quả đạt được cùng hạn chế, bất cập còn tồn tại gợi mở nhiều bài học kinh nghiệm có giá trị cho ngành Giáo dục."
         }
     ];
     const title: StoryData[] = [
@@ -83,12 +83,12 @@ const TopNew = ()=>{
                     </div>
                     <PosterGiay/>
                 </div>
-                <div className={`grid grid-cols-4 gap-5 container mt-10`}>
+                <div className={`grid grid-cols-4 gap-4 container mt-8`}>
                         {ImgPhu.map((img, index) => (
                             <StoryThumb key={index} img={img} />
                         ))}
                         {title.map((story, index) => (
-                            <a className={``} key={index}>
+                            <a className={`!text-[15px]`} key={index}>
                                 <Story data={story} />
                             </a>
                         ))}
