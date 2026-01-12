@@ -1,15 +1,19 @@
-import HeadHome from "./HeadHome.tsx";
+import HeadHome from "./HeadHome";
 import FooterHome from "./FooterHome";
-import Poster from "../../pages/HomePage/Poster.tsx";
+import Banner from "./Banner";
+import { Outlet } from "react-router-dom";
 
-const HomeLayout = () =>{
+const HomeLayout = () => {
     return (
         <>
-            <HeadHome/>
-            <Poster/>
-            <FooterHome/>
+            <HeadHome />
+            <Banner />
+            <main className="container mx-auto mt-6">
+                <Outlet />
+            </main>
+            <FooterHome />
         </>
-    )
-}
+    );
+};
 
 export default HomeLayout;

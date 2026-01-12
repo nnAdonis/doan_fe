@@ -3,9 +3,123 @@
 
 
 .container{
-    width: 980px;
+    width: 1100px;
     padding: 0 12px;
     margin-left: auto;
     margin-right: auto;
 }
+a:hover {
+    color: #c31e40;
+}
+.article-content {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #111;
+}
+
+/* ĐOẠN VĂN */
+.article-content p {
+    margin: 16px 0;
+}
+
+/* TIÊU ĐỀ TRONG BÀI */
+.article-content h2 {
+    font-size: 22px;
+    font-weight: 700;
+    margin: 24px 0 12px;
+}
+
+/* HÌNH ẢNH */
+.article-content img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 16px auto;
+    border-radius: 6px;
+}
+
+/* CHÚ THÍCH ẢNH */
+.article-content .caption {
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+    margin-top: 6px;
+}
+
+/* LINK */
+.article-content a {
+    color: #c31e40;
+    font-weight: 600;
+}
+
+.article-content a:hover {
+    text-decoration: underline;
+}
+
+/* TABLE ẢNH */
+.article-content table {
+    width: 100%;
+    margin: 16px 0;
+}
+.article-content table.picture {
+    width: 100%;
+    margin: 16px auto;
+    text-align: center;
+}
+
+.menu-item:hover .sub-menu {
+    display: block;
+}
+
+.sub-item a {
+    display: block;
+    padding: 10px 14px;
+}
+
+.sub-item a:hover {
+    background: #f5f5f5;
+    color: #c31e40;
+}
+
+.menu-link:hover {
+    color: #ffd6d6;
+}
+
+/* ===== HOT EVENTS ===== */
+.hot-events {
+    border-top: 2px solid #e5e5e5;
+    padding-top: 12px;
+}
+
+.hot-events .title {
+    display: inline-block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #b91c1c;
+}
+
+.hot-events .slide-wrapper {
+    position: relative;
+}
+
+.hot-events .news-list {
+    padding: 6px 0;
+}
+
+.hot-events .event-tag {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background: #f3f3f3;
+    font-size: 14px;
+    white-space: nowrap;
+    transition: all 0.2s ease;
+}
+
+.hot-events .event-tag:hover {
+    background: #b91c1c;
+    color: #fff;
+}
+
+
 
