@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getRss } from "../services/rssService";
+import SeeMore from "../components/SeeMore.tsx";
 
 /* ================= MAP DANH MỤC ================= */
 const CATEGORY_MAP: Record<
@@ -196,8 +197,8 @@ const CATEGORY_MAP: Record<
 
 };
 
-export default function Category() {
-    const { slug } = useParams();
+export function Category() {
+    const {slug} = useParams();
     const [news, setNews] = useState<any[]>([]);
     const [loading, setLoading] = useState(true);
 
@@ -295,7 +296,7 @@ export default function Category() {
                                             className="w-full object-cover rounded hover:scale-105 transition"
                                         />
                                     ) : (
-                                        <div className="w-full h-20 bg-gray-200" />
+                                        <div className="w-full h-20 bg-gray-200"/>
                                     )}
                                 </Link>
 
@@ -380,11 +381,8 @@ export default function Category() {
 
                     </aside>
                 </div>
-
-
                 {/* ================= CỘT PHẢI ================= */}
-                <aside className="bg-black h-[600px] sticky top-4" />
-
+                <aside className="bg-black h-[600px] sticky top-4"/>
             </div>
         </div>
     );

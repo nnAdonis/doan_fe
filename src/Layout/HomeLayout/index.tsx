@@ -2,6 +2,8 @@ import HeadHome from "./HeadHome";
 import FooterHome from "./FooterHome";
 import Banner from "./Banner";
 import { Outlet } from "react-router-dom";
+import SeeMore from "../../components/SeeMore.tsx";
+import CateList from "../../components/CateList.tsx";
 
 const HomeLayout = () => {
     return (
@@ -17,9 +19,10 @@ const HomeLayout = () => {
             </main>
             <Banner images={[
                 "https://cdn.giaoducthoidai.vn/images/dd0228cb04d6ecc7574376a7e805a48489cc804cd1f6c462fefce0786afe75c1/coverfb.jpg",
-            ]}
-                className={`container`}
+            ]} className={`container mt-10`}
             />
+            <SeeMore/>
+            <CateList/>
             <FooterHome />
         </>
     );
