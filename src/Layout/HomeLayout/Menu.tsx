@@ -12,7 +12,7 @@ export default function Menu() {
                     <li className="h-10 flex items-center">
                         <Link
                             to="/"
-                            className="px-3 flex items-center hover:bg-[#a91833]"
+                            className="px-3 flex items-center hover:bg-red-300"
                         >
                             <FaHome />
                         </Link>
@@ -29,7 +29,7 @@ export default function Menu() {
                                 className="
                                     px-3 h-10 flex items-center
                                     font-medium
-                                    hover:bg-[#a91833]
+                                    hover:bg-red-300
                                     whitespace-nowrap
 
                                 "
