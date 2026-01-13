@@ -24,7 +24,7 @@ const HeadHome = () => {
     return (
         <>
             {/* ================= TOP BAR ================= */}
-            <div className="bg-[#f5f5f5] text-xs py-2">
+            <div className="bg-[#f5f5f5] text-xs py-2 ">
                 <div className="container flex gap-6 items-center">
                     <div>{time}</div>
 
@@ -53,8 +53,8 @@ const HeadHome = () => {
             </div>
 
             {/* ================= LOGO + SEARCH ================= */}
-            <div className="container py-3">
-                <div className="flex justify-between items-center">
+            <div className="container py-3 mt-4 m-4">
+                <div className="flex justify-between">
                     <Link to="/">
                         <img
                             src="https://cdn.giaoducthoidai.vn/assets/web/styles/img/logo.svg"
@@ -62,24 +62,25 @@ const HeadHome = () => {
                             className="w-40"
                         />
                     </Link>
+                    <div className={`flex justify-end items-end gap-5 pt-5`}>
+                        <div className="relative">
+                            <input
+                                disabled
+                                className="bg-[#f5f5f5] h-10 w-56 border border-gray-300 rounded-full pl-4"
+                            />
+                            <FaSearch
+                                className="absolute right-4 top-2.5"
+                                color="#c31e40"
+                                size={18}
+                            />
+                        </div>
 
-                    <div className="relative">
-                        <input
-                            disabled
-                            className="bg-[#f5f5f5] h-10 w-56 border border-gray-300 rounded-full pl-4"
-                        />
-                        <FaSearch
-                            className="absolute right-4 top-2.5"
-                            color="#c31e40"
-                            size={18}
+                        <img
+                            className="w-20 h-7"
+                            src="https://cdn.giaoducthoidai.vn/assets/web/styles/img/gdtd.png"
+                            alt=""
                         />
                     </div>
-
-                    <img
-                        className="w-20"
-                        src="https://cdn.giaoducthoidai.vn/assets/web/styles/img/gdtd.png"
-                        alt=""
-                    />
                 </div>
             </div>
 
