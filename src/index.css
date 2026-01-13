@@ -121,5 +121,43 @@ a:hover {
     color: #fff;
 }
 
+/* LIGHT MODE (default) */
+:root {
+    --bg: #ffffff;
+    --text: #000000;
+    --header: #ffffff;
+    --menu: #c4002f;
+    --box: #f5f5f5;
+}
+
+/* DARK MODE */
+body.dark {
+    --bg: #121212;
+    --text: #eaeaea;
+    --header: #1e1e1e;
+    --menu: #8b001f;
+    --box: #1f1f1f;
+}
+
+/* Áp dụng biến */
+body {
+    background: var(--bg);
+    color: var(--text);
+}
+
+.header {
+    background: var(--header);
+}
+
+.menu {
+    background: var(--menu);
+}
+
+.main-content,
+.sidebar {
+    background: var(--box);
+}
+
+
 
 
