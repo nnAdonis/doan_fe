@@ -8,6 +8,7 @@ import Topic from "./pages/Topic";
 import Category from "./pages/Category";
 import ScrollToTop from "./components/ScrollToTop";
 import "./assets/css/hot-news.css";
+// import "./assets/css/hot-news.css";
 
 function App() {
     return (

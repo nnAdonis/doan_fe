@@ -3,13 +3,6 @@ import { getRss } from "../services/rssService";
 import { Link } from "react-router-dom";
 
 // ===== TYPES =====
-interface HotEvent {
-    title: string;
-    link: string;
-    thumb?: string;
-    time?: string;
-}
-
 interface NewsItem {
     title: string;
     link: string;
@@ -37,7 +30,9 @@ const MENU_LIST: Record<string, { rss: string; title: string }> = {
 // ===== COMPONENT =====
 export default function Home() {
     const [news, setNews] = useState<NewsItem[]>([]);
-    const [hotEvents, setHotEvents] = useState<HotEvent[]>([]);
+    // const [hotEvents, setHotEvents] = useState<HotEvent[]>([]);
+    const [events, setEvents] = useState<{ title: string; link: string }[]>([]);
+    const [loadingEvents, setLoadingEvents] = useState(true);
     const [menuNews, setMenuNews] = useState<Record<string, NewsItem[]>>({});
 
     // ===== LẤY TIN TRANG CHỦ =====
@@ -47,24 +42,12 @@ export default function Home() {
             .catch(() => setNews([]));
     }, []);
 
-    // ===== LẤY HOT EVENTS =====
+    /* ===== EVENTS ===== */
     useEffect(() => {
-        fetch(`/api/topic?link=${encodeURIComponent("https://giaoducthoidai.vn/su-kien")}`)
-            .then((res) => res.json())
-            .then((data) => {
-                if (data?.articles?.length) {
-                    const events: HotEvent[] = data.articles.slice(0, 5).map((item: any) => ({
-                        title: item.title,
-                        link: item.link,
-                        thumb: item.thumb,
-                        time: item.time,
-                    }));
-                    setHotEvents(events);
-                } else {
-                    setHotEvents([]);
-                }
-            })
-            .catch(() => setHotEvents([]));
+        fetch("http://localhost:3000/api/events")
+            .then(res => res.json())
+            .then(setEvents)
+            .finally(() => setLoadingEvents(false));
     }, []);
 
     // ===== LẤY TIN 12 MENU =====
@@ -89,26 +72,36 @@ export default function Home() {
     return (
         <div className="max-w-6xl mx-auto px-4 mt-6">
             {/* ===== SỰ KIỆN ===== */}
-            <div className="hot-events mb-8">
-                <div className="flex items-center gap-4 mb-4">
-                    <h3 className="text-xl font-bold text-red-700 uppercase whitespace-nowrap">Sự kiện</h3>
-                    {hotEvents.length === 0 ? (
-                        <p className="text-gray-500 text-sm">Không có sự kiện</p>
-                    ) : (
-                        <div className="overflow-x-auto flex gap-6 scrollbar-hide py-1">
-                            {hotEvents.map((e, idx) => (
-                                <Link
-                                    key={idx}
-                                    to={`/chu-de?link=${encodeURIComponent(e.link)}`}
-                                    className="text-blue-700 hover:underline whitespace-nowrap font-semibold"
-                                >
-                                    #{e.title}
-                                </Link>
-                            ))}
-                        </div>
-                    )}
+            {loadingEvents ? (
+                <div className="text-gray-500 text-sm italic">
+                    Đang tải sự kiện...
                 </div>
-            </div>
+            ) : events.length > 0 ? (
+                <div className="event-wrapper mb-6">
+                    <div className="flex items-center gap-4">
+                        <h3 className="text-xl font-bold text-red-700 whitespace-nowrap">
+                            Sự kiện
+                        </h3>
+
+                        <div className="event-slide overflow-hidden w-full">
+                            <ul className="event-track flex gap-8">
+                                {[...events, ...events].map((e, i) => (
+                                    <li key={i} className="whitespace-nowrap">
+                                        <Link
+                                            to={`/chu-de?link=${encodeURIComponent(
+                                                e.link
+                                            )}`}
+                                            className="font-semibold text-blue-700 hover:underline"
+                                        >
+                                            #{e.title}
+                                        </Link>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            ) : null}
 
             {/* ===== HOTNEWS / TIN NỔI BẬT ===== */}
             <div className="abf-homepage mb-8">
