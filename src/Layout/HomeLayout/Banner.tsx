@@ -18,11 +18,11 @@ export default function Banner() {
     }, [images.length]);
 
     return (
-        <div className="w-full h-64 ">
+        <div className="container mt-4">
             <img
                 src={images[index]}
                 alt="banner"
-                className="w-full h-full "
+                className="container max-h-24 "
             />
         </div>
     );
