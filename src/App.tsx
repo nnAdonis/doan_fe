@@ -5,9 +5,9 @@ import HomeLayout from "./Layout/HomeLayout";
 import Home from "./pages/Home";
 import Detail from "./pages/Detail";
 import Topic from "./pages/Topic";
-import Category from "./pages/Category";
+import {Category} from "./pages/Category";
 import ScrollToTop from "./components/ScrollToTop";
-import "./assets/css/hot-news.css";
+// import "./assets/css/hot-news.css";
 
 function App() {
     return (
