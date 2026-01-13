@@ -218,21 +218,24 @@ export default function Category() {
             .then(setNews)
             .finally(() => setLoading(false));
     }, [slug]);
+    const featured = news[0];
+    const list = news.filter(
+        (item) => item.link !== featured?.link
+    );
 
     if (!category) {
         return <p className="text-center py-10">Danh mục không tồn tại</p>;
     }
 
     return (
-        <div className="max-w-5xl mx-auto px-4 mt-6">
-
+        <div className="max-w-[1200px] mx-auto px-4 mt-6">
             {/* ===== BREADCRUMB ===== */}
             <div className="mb-4 text-sm text-gray-600">
                 {parent && (
                     <>
                         <Link
                             to={`/category/${category.parent}`}
-                            className="hover:underline"
+                            className="hover:underline text-[20px] font-bold"
                         >
                             {parent.title}
                         </Link>
@@ -248,63 +251,140 @@ export default function Category() {
             </h1>
 
             {loading && <p>Đang tải...</p>}
+            {!loading && news.length === 0 && <p>Không có bài viết</p>}
 
-            {!loading && news.length === 0 && (
-                <p>Không có bài viết</p>
-            )}
+            <div className="grid grid-cols-[1fr_180px_220px] gap-6">
 
-            {/* ===== LIST BÀI VIẾT ===== */}
-            <div className="grid gap-6">
-                {news.map((item, idx) => (
-                    <article
-                        key={idx}
-                        className="story grid grid-cols-[120px_1fr] gap-4 pb-4 border-b"
-                    >
-                        {/* IMAGE */}
-                        <figure className="story__thumb overflow-hidden rounded">
+                {/* ================= CỘT TRÁI ================= */}
+                <div>
+                    {/* ===== LIST ===== */}
+                    {featured && (
+                        <article className="mb-6">
                             <Link
-                                to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                title={item.title}
+                                to={`/detail?link=${encodeURIComponent(featured.link)}`}
                                 className="block"
                             >
-                                {item.image ? (
+                                {featured.image && (
+                                    <img
+                                        src={featured.image}
+                                        alt={featured.title}
+                                        className="w-full h-[360px] object-cover rounded"
+                                    />
+                                )}
+
+                                <h2 className="mt-4 text-xl font-bold leading-snug hover:text-red-700 transition">
+                                    {featured.title}
+                                </h2>
+                            </Link>
+                        </article>
+                    )}
+                    <div className="grid gap-6">
+                        {news.map((item, idx) => (
+                            <article
+                                key={idx}
+                                className="grid grid-cols-[240px_1fr] gap-2  "
+                            >
+                                <Link
+                                    to={`/detail?link=${encodeURIComponent(item.link)}`}
+                                    className="block"
+                                >
+                                    {item.image ? (
+                                        <img
+                                            src={item.image}
+                                            alt={item.title}
+                                            className="w-full object-cover rounded hover:scale-105 transition"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-20 bg-gray-200" />
+                                    )}
+                                </Link>
+
+                                <div className="flex flex-col gap-1">
+                                    <h3 className="font-semibold text-sm line-clamp-2">
+                                        <Link
+                                            to={`/detail?link=${encodeURIComponent(item.link)}`}
+                                            className="hover:text-red-700"
+                                        >
+                                            {item.title}
+                                        </Link>
+                                    </h3>
+
+                                    {item.time && (
+                                        <time className="text-xs text-gray-500">
+                                            {item.time}
+                                        </time>
+                                    )}
+
+                                    {item.summary && (
+                                        <p className="text-xs text-gray-600 line-clamp-2">
+                                            {item.summary}
+                                        </p>
+                                    )}
+                                </div>
+                            </article>
+                        ))}
+                    </div>
+                </div>
+
+                {/* ================= CỘT GIỮA ================= */}
+                <div className={` flex flex-col gap-6`}>
+                    <aside>
+                        <h2 className="font-semibold text-lg border-l-4 border-red-700 pl-3 mb-2 bg-[#f5f5f5]">
+                            Tin tiêu điểm
+                        </h2>
+
+                        <div className="flex flex-col gap-4">
+                            {news.slice(0, 5).map((item, idx) => (
+                                <article key={idx} className="flex flex-col gap-1">
                                     <img
                                         src={item.image}
                                         alt={item.title}
-                                        loading="lazy"
-                                        className="w-full h-20 object-cover hover:scale-105 transition"
+                                        className="object-cover rounded"
                                     />
-                                ) : (
-                                    <div className="w-full h-20 bg-gray-200" />
-                                )}
-                            </Link>
-                        </figure>
-
-                        {/* CONTENT */}
-                        <div className="story__content flex flex-col gap-1">
-                            <h3 className="font-semibold text-sm leading-snug line-clamp-2">
-                                <Link
-                                    to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                    className="hover:text-red-700 transition"
-                                >
-                                    {item.title}
-                                </Link>
-                            </h3>
-
-                            {item.time && (
-                                <time className="text-xs text-gray-500">
-                                    {item.time}
-                                </time>
-                            )}
-
-                            {item.summary && (
-                                <p className="text-xs text-gray-600 line-clamp-2">
-                                    {item.summary}
-                                </p>
-                            )}
+                                    <h3 className="text-sm font-medium line-clamp-2">
+                                        <Link
+                                            to={`/detail?link=${encodeURIComponent(item.link)}`}
+                                            className="hover:text-red-700"
+                                        >
+                                            {item.title}
+                                        </Link>
+                                    </h3>
+                                </article>
+                            ))}
                         </div>
-                    </article>
-                ))}
+                    </aside>
+                    <aside className={`top-4 self-start sticky`}>
+                        <h2 className="  font-semibold text-lg border-l-4 border-red-700 pl-3 mb-2 bg-[#f5f5f5]">
+                            Tin tiêu điểm
+                        </h2>
+
+                        <div className="flex flex-col gap-4">
+                            {news.slice(0, 5).map((item, idx) => (
+                                <article key={idx} className="flex flex-col gap-1">
+                                    <img
+                                        src={item.image}
+                                        alt={item.title}
+                                        className="object-cover rounded"
+                                    />
+                                    <h3 className="text-sm font-medium line-clamp-2">
+                                        <Link
+                                            to={`/detail?link=${encodeURIComponent(item.link)}`}
+                                            className="hover:text-red-700"
+                                        >
+                                            {item.title}
+                                        </Link>
+                                    </h3>
+                                </article>
+                            ))}
+                        </div>
+
+                    </aside>
+                </div>
+
+
+                {/* ================= CỘT PHẢI ================= */}
+                <aside className="bg-black h-[600px] sticky top-4" />
+
             </div>
         </div>
     );

@@ -112,11 +112,11 @@ export default function Home() {
 
             {/* ===== HOTNEWS / TIN NỔI BẬT ===== */}
             <div className="abf-homepage mb-8">
-                <div className="top-news grid grid-cols-1 md:grid-cols-[3fr_1fr] gap-6 mb-6">
+                <div className="top-news grid grid-cols-1 md:grid-cols-[4.5fr_1fr] gap-6 mb-6">
                     {topNews[0] && (
-                        <div className="rank-1">
-                            <article className="story flex flex-col">
-                                <figure className="story__thumb overflow-hidden rounded-lg">
+                        <div className="rank-1 ">
+                            <article className="story grid grid-cols-[1fr_260px] gap-[20px] ">
+                                <figure className="story__thumb overflow-hidden ">
                                     <Link to={`/detail?link=${encodeURIComponent(topNews[0].link)}`}>
                                         {topNews[0].image ? (
                                             <img
@@ -129,29 +129,31 @@ export default function Home() {
                                         )}
                                     </Link>
                                 </figure>
-                                <h2 className="story__heading text-2xl font-bold mt-3 leading-snug line-clamp-3">
-                                    <Link
-                                        to={`/detail?link=${encodeURIComponent(topNews[0].link)}`}
-                                        className="hover:text-red-700 transition-colors"
-                                    >
-                                        {topNews[0].title}
-                                    </Link>
-                                </h2>
-                                {topNews[0].time && (
-                                    <time className="story__time text-sm text-gray-500 mt-1 block">{topNews[0].time}</time>
-                                )}
-                                {topNews[0].summary && (
-                                    <div className="story__summary text-gray-600 mt-2 line-clamp-4">
-                                        <p>{topNews[0].summary}</p>
-                                    </div>
-                                )}
+                                <div>
+                                    <h2 className="story__heading text-2xl font-bold leading-snug line-clamp-3">
+                                        <Link
+                                            to={`/detail?link=${encodeURIComponent(topNews[0].link)}`}
+                                            className="hover:text-red-700 transition-colors"
+                                        >
+                                            {topNews[0].title}
+                                        </Link>
+                                    </h2>
+                                    {topNews[0].time && (
+                                        <time className="story__time text-sm text-gray-500 mt-1 block">{topNews[0].time}</time>
+                                    )}
+                                    {topNews[0].summary && (
+                                        <div className="story__summary text-gray-600 mt-2 line-clamp-4">
+                                            <p>{topNews[0].summary}</p>
+                                        </div>
+                                    )}
+                                </div>
                             </article>
                         </div>
                     )}
 
                     {/* Banner quảng cáo */}
                     <div className="rank-2 hidden md:flex flex-col gap-4">
-                        <div className="banner h-80 bg-gray-100 flex items-center justify-center rounded-lg overflow-hidden">
+                        <div className="banner bg-gray-100 flex items-center justify-center rounded-lg overflow-hidden">
                             <a href="/epaper/" target="_blank">
                                 <img
                                     src="https://cdn.giaoducthoidai.vn/images/df6357f0e2dcb343ab463ca30a52a8b2fe20a926d2110a752ee56e08d9a7d2edd84ba235097c0affb7644db7301c1301/banner-baoin.png"
@@ -204,19 +206,20 @@ export default function Home() {
                     const subs = articles.slice(1, 5);
 
                     return (
-                        <div key={key} className="onemain-foursub border-t pt-4">
-                            <div className="box-heading mb-3 flex items-center justify-between">
-                                <h3 className="wrap-heading text-lg font-bold">
+                        <div key={key} className="onemain-foursub">
+                            <div className="box-heading mb-3">
+                                <h3 className="wrap-heading text-lg text-[#c31e40] font-bold flex gap-2">
                                     <Link
-                                        className="heading hover:text-red-700"
+                                        className="heading "
                                         to={`/chu-de?link=${encodeURIComponent(MENU_LIST[key].rss)}`}
                                     >
                                         {MENU_LIST[key].title}
                                     </Link>
+                                    <div className="flex-1 border-b border-[#c31e40] relative bottom-[8px]"></div>
                                 </h3>
                             </div>
 
-                            <div className="box-content grid grid-cols-1 md:grid-cols-[2fr_3fr] gap-4">
+                            <div className="box-content grid grid-cols-1 md:grid-cols-[3fr_3fr] gap-8">
                                 {top && (
                                     <div className="item-primary">
                                         <article className="story flex flex-col">
@@ -288,6 +291,7 @@ export default function Home() {
                     );
                 })}
             </div>
+
         </div>
     );
 }
