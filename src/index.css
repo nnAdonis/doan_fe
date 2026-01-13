@@ -121,5 +121,25 @@ a:hover {
     color: #fff;
 }
 
+/* events.css */
+.event-slide {
+    overflow: hidden;
+}
+
+.event-track {
+    display: flex;
+    width: max-content;
+    animation: slideEvent 25s linear infinite;
+}
+
+@keyframes slideEvent {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
 
 
