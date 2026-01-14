@@ -33,9 +33,6 @@ const MENU_LIST: Record<string, { rss: string; title: string }> = {
 // ===== COMPONENT =====
 export default function Home() {
     const [news, setNews] = useState<NewsItem[]>([]);
-    // const [hotEvents, setHotEvents] = useState<HotEvent[]>([]);
-    const [events, setEvents] = useState<{ title: string; link: string }[]>([]);
-    const [loadingEvents, setLoadingEvents] = useState(true);
     const [menuNews, setMenuNews] = useState<Record<string, NewsItem[]>>({});
 
     // ===== LẤY TIN TRANG CHỦ =====
@@ -46,12 +43,7 @@ export default function Home() {
     }, []);
 
     /* ===== EVENTS ===== */
-    useEffect(() => {
-        fetch("http://localhost:3000/api/events")
-            .then(res => res.json())
-            .then(setEvents)
-            .finally(() => setLoadingEvents(false));
-    }, []);
+
 
     // ===== LẤY TIN 12 MENU =====
     useEffect(() => {
@@ -73,39 +65,7 @@ export default function Home() {
     const topNews = news.slice(0, 5); // 1 bài lớn + 4 bài nhỏ
 
     return (
-        <div className="max-w-6xl mx-auto px-4 mt-6">
-            {/* ===== SỰ KIỆN ===== */}
-            {loadingEvents ? (
-                <div className="text-gray-500 text-sm italic">
-                    Đang tải sự kiện...
-                </div>
-            ) : events.length > 0 ? (
-                <div className="event-wrapper mb-6">
-                    <div className="flex items-center gap-4">
-                        <h3 className="text-xl font-bold text-red-700 whitespace-nowrap">
-                            Sự kiện
-                        </h3>
-
-                        <div className="event-slide overflow-hidden w-full">
-                            <ul className="event-track flex gap-8">
-                                {[...events, ...events].map((e, i) => (
-                                    <li key={i} className="whitespace-nowrap">
-                                        <Link
-                                            to={`/chu-de?link=${encodeURIComponent(
-                                                e.link
-                                            )}`}
-                                            className="font-semibold text-blue-700 hover:underline"
-                                        >
-                                            #{e.title}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            ) : null}
-
+        <div className="max-w-6xl mx-auto px-4 mt-6 container">
             {/* ===== HOTNEWS / TIN NỔI BẬT ===== */}
             <div className="abf-homepage mb-8">
                 <div className="top-news grid grid-cols-1 md:grid-cols-[4.5fr_1fr] gap-6 mb-6">

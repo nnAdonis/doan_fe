@@ -7,6 +7,7 @@ import Detail from "./pages/Detail";
 import Topic from "./pages/Topic";
 import {Category} from "./pages/Category";
 import ScrollToTop from "./components/ScrollToTop";
+import {Search} from "./pages/Search.tsx";
 // import "./assets/css/hot-news.css";
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
                         <Route path="category/:slug" element={<Category />} />
 
                         <Route path="/chu-de" element={<Topic />} />
+
+                        <Route path="/search" element={<Search />} />
 
                     </Route>
                 </Routes>
