@@ -468,103 +468,99 @@ export default function Detail() {
 
             {/* ===== TIN TIÊU ĐIỂM ===== */}
             {focusNews.length > 0 && (
-                <div className="hot-news">
-                    <div className="box-heading">
+                <section className="hot-news mt-10">
+                    {/* HEADING */}
+                    <div className="box-heading mb-4">
                         <h3 className="wrap-heading">
-                            <span className="heading">Tin tiêu điểm</span>
+                <span className="heading text-2xl font-bold text-red-700">
+                    Tin tiêu điểm
+                </span>
                         </h3>
                     </div>
 
-                    <div className="box-content" data-source="content-box-focus">
+                    {/* CONTENT – 2 CỘT */}
+                    <div className="grid grid-cols-12 gap-6">
 
-                        {/* ===== BÀI CHÍNH ===== */}
+                        {/* ===== CỘT TRÁI – BÀI VIẾT LỚN ===== */}
                         {focusNews[0] && (
-                            <article className="story primary">
+                            <article className="col-span-12 md:col-span-7 space-y-4">
                                 {focusNews[0].image && (
-                                    <figure className="story__thumb">
+                                    <figure className="overflow-hidden rounded-lg">
                                         <Link
-                                            className="cms-link"
                                             to={`/detail?link=${encodeURIComponent(focusNews[0].link)}`}
-                                            title={focusNews[0].title}
                                         >
                                             <img
                                                 src={focusNews[0].image}
                                                 alt={focusNews[0].title}
+                                                className="w-full h-72 object-cover hover:scale-105 transition-transform duration-300"
                                             />
                                         </Link>
                                     </figure>
                                 )}
 
-                                <h2 className="story__heading">
+                                <h2 className="text-2xl font-bold leading-snug hover:text-red-700">
                                     <Link
-                                        className="cms-link"
                                         to={`/detail?link=${encodeURIComponent(focusNews[0].link)}`}
-                                        title={focusNews[0].title}
                                     >
                                         {focusNews[0].title}
                                     </Link>
                                 </h2>
 
                                 {focusNews[0].time && (
-                                    <time className="story__time">
+                                    <time className="text-sm text-gray-500">
                                         {focusNews[0].time}
                                     </time>
                                 )}
 
                                 {focusNews[0].summary && (
-                                    <div className="story__summary story__shorten">
-                                        <p>{focusNews[0].summary}</p>
-                                    </div>
+                                    <p className="text-base text-gray-700 line-clamp-3">
+                                        {focusNews[0].summary}
+                                    </p>
                                 )}
                             </article>
                         )}
 
-                        {/* ===== DANH SÁCH BÊN PHẢI ===== */}
-                        <div className="feature">
+                        {/* ===== CỘT PHẢI – DANH SÁCH BÀI NHỎ ===== */}
+                        <div className="col-span-12 md:col-span-5 space-y-5">
                             {focusNews.slice(1).map((item, idx) => (
-                                <article className="story" key={idx}>
+                                <article key={idx} className="flex gap-3">
                                     {item.image && (
-                                        <figure className="story__thumb">
+                                        <figure className="w-28 h-20 flex-shrink-0 overflow-hidden rounded">
                                             <Link
-                                                className="cms-link"
                                                 to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                                title={item.title}
                                             >
                                                 <img
                                                     src={item.image}
                                                     alt={item.title}
+                                                    className="w-full h-full object-cover"
                                                 />
                                             </Link>
                                         </figure>
                                     )}
 
-                                    <h2 className="story__heading">
-                                        <Link
-                                            className="cms-link"
-                                            to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                            title={item.title}
-                                        >
-                                            {item.title}
-                                        </Link>
-                                    </h2>
+                                    <div className="flex flex-col gap-1">
+                                        <h3 className="text-sm font-semibold leading-snug line-clamp-2 hover:text-red-700">
+                                            <Link
+                                                to={`/detail?link=${encodeURIComponent(item.link)}`}
+                                            >
+                                                {item.title}
+                                            </Link>
+                                        </h3>
 
-                                    {item.time && (
-                                        <time className="story__time">
-                                            {item.time}
-                                        </time>
-                                    )}
-
-                                    {item.summary && (
-                                        <div className="story__summary story__shorten">
-                                            <p>{item.summary}</p>
-                                        </div>
-                                    )}
+                                        {item.time && (
+                                            <time className="text-xs text-gray-500">
+                                                {item.time}
+                                            </time>
+                                        )}
+                                    </div>
                                 </article>
                             ))}
                         </div>
+
                     </div>
-                </div>
+                </section>
             )}
+
 
             {/* ===== TIN NỔI BẬT (CLONE WEB THẬT) ===== */}
             {highlightNews.length > 0 && (
