@@ -2,9 +2,12 @@ import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Menu from "./Menu";
+import { useTheme } from "../../hooks/useTheme";
+
 
 const HeadHome = () => {
     const [time, setTime] = useState("");
+    const { dark, toggleTheme } = useTheme();
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -82,6 +85,23 @@ const HeadHome = () => {
                         />
                     </div>
                 </div>
+                <button
+                    onClick={toggleTheme}
+                    className="
+    text-xl
+    w-9 h-9
+    flex items-center justify-center
+    rounded-full
+    bg-gray-200
+    dark:bg-gray-700
+    hover:scale-110
+    transition
+  "
+                    title="Chuyển Dark / Light"
+                >
+                    {dark ? "☀️" : "🌙"}
+                </button>
+
             </div>
 
             {/* ================= MENU (DROPDOWN) ================= */}
