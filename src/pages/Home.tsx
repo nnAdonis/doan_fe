@@ -199,7 +199,7 @@ export default function Home() {
             <Banner images={[
                 "https://cdn.giaoducthoidai.vn/images/d7e5dade6c26bca1d90c2e8fb2faee186e8524fa74c9062767df0100094b01a1f566b40b5d666d6e9872c56c6b33229d/daihoi-14-pc.png"
             ]}
-                    className={`mb-6 mr-6 ml-6`}
+                className={`mb-6 mr-6 ml-6`}
             />
 
             {/* ===== HOTNEWS / TIN NỔI BẬT ===== */}

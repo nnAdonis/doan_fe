@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
     return (
-        <footer className="bg-[#c31e40] text-white mt-10 pt-10 pb-8 text-base">
-            <div className="mx-auto max-w-[956px] px-4 grid grid-cols-1 md:grid-cols-[25%_40%_35%] gap-6 items-start">
+        <footer className="bg-[#c31e40] text-white mt-10 pt-10 pb-8 text-base ">
+            <div className="mx-auto px-4 grid grid-cols-1 md:grid-cols-[25%_40%_35%] gap-6 items-start container">
 
                 {/* CỘT 1: LOGO → CLICK VỀ TRANG CHỦ */}
                 <div className="flex flex-col items-center text-center">
