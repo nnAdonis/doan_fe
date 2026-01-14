@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getRss } from "../services/rssService";
+import SidebarMiddle from "./SidebarMiddle";
 import SeeMore from "../components/SeeMore.tsx";
 
 /* ================= MAP DANH MỤC ================= */
@@ -197,15 +198,37 @@ const CATEGORY_MAP: Record<
 
 };
 
-export function Category() {
-    const {slug} = useParams();
+/* ================= TYPES ================= */
+// interface HotEvent {
+//     title: string;
+//     link: string;
+// }
+
+export default function Category() {
+    const { slug } = useParams();
     const [news, setNews] = useState<any[]>([]);
+    const [events, setEvents] = useState<{ title: string; link: string }[]>([]);
+    const [loadingEvents, setLoadingEvents] = useState(true);
     const [loading, setLoading] = useState(true);
 
-    const category = slug ? CATEGORY_MAP[slug] : null;
-    const parent = category?.parent
+    const category = slug ? CATEGORY_MAP[slug] : undefined;
+
+    if (!category) {
+        return <p className="text-center py-10">Danh mục không tồn tại</p>;
+    }
+
+    const parent = category.parent
         ? CATEGORY_MAP[category.parent]
-        : null;
+        : category;
+
+    const parentSlug = category.parent ?? slug!;
+
+    const childrenCategories = Object.entries(CATEGORY_MAP)
+        .filter(([, value]) => value.parent === parentSlug)
+        .map(([slug, value]) => ({
+            title: value.title,
+            link: `/category/${slug}`,
+        }));
 
     useEffect(() => {
         if (!category) {
@@ -219,171 +242,214 @@ export function Category() {
             .then(setNews)
             .finally(() => setLoading(false));
     }, [slug]);
-    const featured = news[0];
-    const list = news.filter(
-        (item) => item.link !== featured?.link
-    );
 
-    if (!category) {
-        return <p className="text-center py-10">Danh mục không tồn tại</p>;
-    }
+    const featured = news[0];
+    const listNews = news.slice(1);
+
+    /* ===== LOAD HOT EVENT ===== */
+    useEffect(() => {
+        fetch("http://localhost:3000/api/events")
+            .then(res => res.json())
+            .then(setEvents)
+            .finally(() => setLoadingEvents(false));
+    }, []);
 
     return (
-        <div className="max-w-[1200px] mx-auto px-4 mt-6">
-            {/* ===== BREADCRUMB ===== */}
-            <div className="mb-4 text-sm text-gray-600">
-                {parent && (
-                    <>
-                        <Link
-                            to={`/category/${category.parent}`}
-                            className="hover:underline text-[20px] font-bold"
-                        >
-                            {parent.title}
-                        </Link>
-                        <span className="mx-2">›</span>
-                    </>
-                )}
-                <span className="font-semibold">{category.title}</span>
-            </div>
+        <div className="max-w-5xl mx-auto px-4 mt-6">
 
-            {/* ===== TITLE ===== */}
-            <h1 className="text-2xl font-bold mb-6 border-l-4 border-red-700 pl-3">
-                {category.title}
-            </h1>
+            {/* ===== SỰ KIỆN ===== */}
+            {loadingEvents ? (
+                <div className="text-gray-500 text-sm italic">
+                    Đang tải sự kiện...
+                </div>
+            ) : events.length > 0 ? (
+                <div className="event-wrapper mb-6">
+                    <div className="flex items-center gap-4">
+                        <h3 className="text-xl font-bold text-red-700 whitespace-nowrap">
+                            Sự kiện
+                        </h3>
 
-            {loading && <p>Đang tải...</p>}
-            {!loading && news.length === 0 && <p>Không có bài viết</p>}
-
-            <div className="grid grid-cols-[1fr_180px_220px] gap-6">
-
-                {/* ================= CỘT TRÁI ================= */}
-                <div>
-                    {/* ===== LIST ===== */}
-                    {featured && (
-                        <article className="mb-6">
-                            <Link
-                                to={`/detail?link=${encodeURIComponent(featured.link)}`}
-                                className="block"
-                            >
-                                {featured.image && (
-                                    <img
-                                        src={featured.image}
-                                        alt={featured.title}
-                                        className="w-full h-[360px] object-cover rounded"
-                                    />
-                                )}
-
-                                <h2 className="mt-4 text-xl font-bold leading-snug hover:text-red-700 transition">
-                                    {featured.title}
-                                </h2>
-                            </Link>
-                        </article>
-                    )}
-                    <div className="grid gap-6">
-                        {news.map((item, idx) => (
-                            <article
-                                key={idx}
-                                className="grid grid-cols-[240px_1fr] gap-2  "
-                            >
-                                <Link
-                                    to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                    className="block"
-                                >
-                                    {item.image ? (
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="w-full object-cover rounded hover:scale-105 transition"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-20 bg-gray-200"/>
-                                    )}
-                                </Link>
-
-                                <div className="flex flex-col gap-1">
-                                    <h3 className="font-semibold text-sm line-clamp-2">
+                        <div className="event-slide overflow-hidden w-full">
+                            <ul className="event-track flex gap-8">
+                                {[...events, ...events].map((e, i) => (
+                                    <li key={i} className="whitespace-nowrap">
                                         <Link
-                                            to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                            className="hover:text-red-700"
+                                            to={`/chu-de?link=${encodeURIComponent(
+                                                e.link
+                                            )}`}
+                                            className="font-semibold text-blue-700 hover:underline"
                                         >
-                                            {item.title}
+                                            #{e.title}
                                         </Link>
-                                    </h3>
-
-                                    {item.time && (
-                                        <time className="text-xs text-gray-500">
-                                            {item.time}
-                                        </time>
-                                    )}
-
-                                    {item.summary && (
-                                        <p className="text-xs text-gray-600 line-clamp-2">
-                                            {item.summary}
-                                        </p>
-                                    )}
-                                </div>
-                            </article>
-                        ))}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
+            ) : null}
 
-                {/* ================= CỘT GIỮA ================= */}
-                <div className={` flex flex-col gap-6`}>
-                    <aside>
-                        <h2 className="font-semibold text-lg border-l-4 border-red-700 pl-3 mb-2 bg-[#f5f5f5]">
-                            Tin tiêu điểm
-                        </h2>
+            {/* ================= BREADCRUMB ================= */}
+            {parent && (
+                <div className="cate-breadcrumb mb-6 flex flex-wrap items-center gap-x-4 gap-y-2">
 
-                        <div className="flex flex-col gap-4">
-                            {news.slice(0, 5).map((item, idx) => (
-                                <article key={idx} className="flex flex-col gap-1">
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="object-cover rounded"
-                                    />
-                                    <h3 className="text-sm font-medium line-clamp-2">
-                                        <Link
-                                            to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                            className="hover:text-red-700"
-                                        >
-                                            {item.title}
-                                        </Link>
-                                    </h3>
-                                </article>
+                    {/* ===== CATEGORY PARENT ===== */}
+                    <Link
+                        to={`/category/${parentSlug}`}
+                        className="text-xl font-bold text-red-700 hover:underline whitespace-nowrap"
+                    >
+                        {parent.title}
+                    </Link>
+
+                    {/* ===== CATEGORY CHILDREN ===== */}
+                    {childrenCategories.length > 0 && (
+                        <ul className="flex flex-wrap items-center gap-x-4">
+                            {childrenCategories.map((child, idx) => (
+                                <li key={idx}>
+                                    <Link
+                                        to={child.link}
+                                        className={`text-base font-semibold whitespace-nowrap transition
+                                ${
+                                            child.title === category.title
+                                                ? "text-red-700"
+                                                : "text-gray-700 hover:text-red-700"
+                                        }`}
+                                    >
+                                        {child.title}
+                                    </Link>
+                                </li>
                             ))}
-                        </div>
-                    </aside>
-                    <aside className={`top-4 self-start sticky`}>
-                        <h2 className="  font-semibold text-lg border-l-4 border-red-700 pl-3 mb-2 bg-[#f5f5f5]">
-                            Tin tiêu điểm
-                        </h2>
-
-                        <div className="flex flex-col gap-4">
-                            {news.slice(0, 5).map((item, idx) => (
-                                <article key={idx} className="flex flex-col gap-1">
-                                    <img
-                                        src={item.image}
-                                        alt={item.title}
-                                        className="object-cover rounded"
-                                    />
-                                    <h3 className="text-sm font-medium line-clamp-2">
-                                        <Link
-                                            to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                            className="hover:text-red-700"
-                                        >
-                                            {item.title}
-                                        </Link>
-                                    </h3>
-                                </article>
-                            ))}
-                        </div>
-
-                    </aside>
+                        </ul>
+                    )}
                 </div>
-                {/* ================= CỘT PHẢI ================= */}
-                <aside className="bg-black h-[600px] sticky top-4"/>
+            )}
+
+            {/* ================== GRID 3 CỘT ================== */}
+            <div className="grid grid-cols-[55%_20%_25%] gap-6">
+
+                {/* ===== MAIN CONTENT ===== */}
+                <div>
+                    <h1 className="text-2xl font-bold mb-6 border-l-4 border-red-700 pl-3">
+                        {category.title}
+                    </h1>
+
+                    {loading && <p>Đang tải...</p>}
+
+                    {!loading && featured && (
+                        <>
+                            {/* FEATURED */}
+                            <article className="mb-8">
+                                <figure className="overflow-hidden rounded">
+                                    <Link to={`/detail?link=${encodeURIComponent(featured.link)}`}>
+                                        <img
+                                            src={featured.image}
+                                            alt={featured.title}
+                                            className="w-full h-80 object-cover hover:scale-105 transition"
+                                        />
+                                    </Link>
+                                </figure>
+
+                                <h2 className="text-xl font-bold mt-4 leading-snug">
+                                    <Link
+                                        to={`/detail?link=${encodeURIComponent(featured.link)}`}
+                                        className="hover:text-red-700"
+                                    >
+                                        {featured.title}
+                                    </Link>
+                                </h2>
+
+                                {/* 👉 MÔ TẢ */}
+                                {featured.summary && (
+                                    <p className="text-gray-600 mt-2 leading-relaxed">
+                                        {featured.summary}
+                                    </p>
+                                )}
+                            </article>
+
+                            {/* LIST */}
+                            <div className="grid gap-6">
+                                {listNews.map((item, idx) => (
+                                    <article
+                                        key={idx}
+                                        className="grid grid-cols-[2fr_3fr] gap-4 pb-6 border-b"
+                                    >
+                                        <figure className="overflow-hidden rounded">
+                                            <Link to={`/detail?link=${encodeURIComponent(item.link)}`}>
+                                                {item.image ? (
+                                                    <img
+                                                        src={item.image}
+                                                        alt={item.title}
+                                                        className="w-full h-28 object-cover hover:scale-105 transition"
+                                                    />
+                                                ) : (
+                                                    <div className="w-full h-28 bg-gray-200" />
+                                                )}
+                                            </Link>
+                                        </figure>
+
+                                        <div>
+                                            <h3 className="font-semibold text-base leading-snug">
+                                                <Link
+                                                    to={`/detail?link=${encodeURIComponent(item.link)}`}
+                                                    className="hover:text-red-700"
+                                                >
+                                                    {item.title}
+                                                </Link>
+                                            </h3>
+
+                                            {item.time && (
+                                                <time className="text-xs text-gray-500">
+                                                    {item.time}
+                                                </time>
+                                            )}
+
+                                            {item.summary && (
+                                                <p className="text-sm text-gray-600 line-clamp-3">
+                                                    {item.summary}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </div>
+
+                {/* ===== SIDEBAR ===== */}
+                <SidebarMiddle />
+
+                {/* ===== BANNER DỌC ===== */}
+                <div className="sticky top-20 space-y-4">
+
+                    {/* Banner 1 */}
+                    <a
+                        href="#"
+                        className="block overflow-hidden rounded shadow"
+                        title="Quảng cáo"
+                    >
+                        <img
+                            src="https://via.placeholder.com/160x600?text=Banner+Ads"
+                            alt="Banner quảng cáo"
+                            className="w-full object-cover"
+                        />
+                    </a>
+
+                    {/* Banner 2 */}
+                    <a
+                        href="#"
+                        className="block overflow-hidden rounded shadow"
+                        title="Quảng cáo"
+                    >
+                        <img
+                            src="https://via.placeholder.com/160x300?text=Ads"
+                            alt="Banner quảng cáo"
+                            className="w-full object-cover"
+                        />
+                    </a>
+                </div>
             </div>
         </div>
     );
 }
+

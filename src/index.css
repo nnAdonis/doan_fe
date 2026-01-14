@@ -180,4 +180,11 @@ body {
 
 
 
+.menu {
+    background: var(--menu);
+}
 
+.main-content,
+.sidebar {
+    background: var(--box);
+}
