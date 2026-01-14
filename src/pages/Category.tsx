@@ -283,7 +283,7 @@ export function Category() {
                         {news.map((item, idx) => (
                             <article
                                 key={idx}
-                                className="grid grid-cols-[240px_1fr] gap-3  "
+                                className="grid grid-cols-[240px_1fr] gap-2  "
                             >
                                 <Link
                                     to={`/detail?link=${encodeURIComponent(item.link)}`}
@@ -300,7 +300,7 @@ export function Category() {
                                     )}
                                 </Link>
 
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-1">
                                     <h3 className="font-semibold text-sm line-clamp-2">
                                         <Link
                                             to={`/detail?link=${encodeURIComponent(item.link)}`}

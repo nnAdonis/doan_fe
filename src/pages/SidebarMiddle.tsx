@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-// import { Link } from "react-router-dom";
 import { getRss } from "../services/rssService";
 import SidebarBoxLarge from "./SidebarBoxLarge";
 
@@ -18,15 +17,15 @@ export default function SidebarMiddle() {
     useEffect(() => {
         // Tin tiêu điểm – 5 bài
         getRss("https://giaoducthoidai.vn/rss/the-thao.rss")
-            .then(data => setFocusNews(data.slice(0, 5)));
+            .then(data => setFocusNews(data.slice(0, 8)));
 
         // Tin nổi bật – 5 bài
         getRss("https://giaoducthoidai.vn/rss/van-hoa.rss")
-            .then(data => setHighlightNews(data.slice(0, 5)));
+            .then(data => setHighlightNews(data.slice(0, 8)));
     }, []);
 
     return (
-        <aside className="space-y-10">
+        <aside className="space-y-12">
 
             {/* ===== TIN TIÊU ĐIỂM (KHÔNG STICKY) ===== */}
             <SidebarBoxLarge
