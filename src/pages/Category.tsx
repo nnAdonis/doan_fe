@@ -197,6 +197,31 @@ const CATEGORY_MAP: Record<
 
 };
 
+function getChildCategories(
+    slug: string,
+    map: Record<string, Category>
+) {
+    const current = map[slug];
+
+    // Nếu không tồn tại category
+    if (!current) return [];
+
+    // Xác định parent cần lấy con
+    const parentKey = current.parent ?? slug;
+
+    return Object.entries(map)
+        .filter(([key, item]) => {
+            // phải là CON của parentKey
+            if (item.parent !== parentKey) return false;
+
+            // nếu đang ở CON thì loại trừ chính nó
+            if (current.parent && key === slug) return false;
+
+            return true;
+        });
+}
+
+
 export function Category() {
     const {slug} = useParams();
     const [news, setNews] = useState<any[]>([]);
@@ -228,6 +253,10 @@ export function Category() {
         return <p className="text-center py-10">Danh mục không tồn tại</p>;
     }
 
+    const childCategories = slug
+        ? getChildCategories(slug, CATEGORY_MAP)
+        : [];
+
     return (
         <div className="max-w-[1200px] mx-auto px-4 mt-6">
             {/* ===== BREADCRUMB ===== */}
@@ -247,9 +276,23 @@ export function Category() {
             </div>
 
             {/* ===== TITLE ===== */}
-            <h1 className="text-2xl font-bold mb-6 border-l-4 border-red-700 pl-3">
-                {category.title}
-            </h1>
+            {category && (
+                <div className='flex space-x-3 '>
+                    <h1 className="text-2xl font-bold mb-6 border-l-4 border-red-700 pl-3">
+                        {category.title}
+                    </h1>
+
+                    <ul className="flex space-2 space-y-2 gap-3 relative top-1.5">
+                        {childCategories.map(([key, item]) => (
+                            <li key={key} className="hover:text-red-600">
+                                {item.title}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+            )}
+
+
 
             {loading && <p>Đang tải...</p>}
             {!loading && news.length === 0 && <p>Không có bài viết</p>}
