@@ -431,7 +431,7 @@ export default function Detail() {
 
             {/* ===== SAME CATEGORY ===== */}
             {data.sameCategory && data.sameCategory.length > 0 && (
-                <section className="mt-12 border-t pt-6">
+                <section className="mt-12 border-t pt-6 mb-6">
                     <h3 className="text-xl font-semibold mb-4">
                         Cùng chuyên mục
                     </h3>
@@ -470,12 +470,12 @@ export default function Detail() {
             {focusNews.length > 0 && (
                 <div className="hot-news">
                     <div className="box-heading">
-                        <h3 className="wrap-heading">
+                        <h3 className="wrap-heading font-bold text-xl mb-2">
                             <span className="heading">Tin tiêu điểm</span>
                         </h3>
                     </div>
 
-                    <div className="box-content" data-source="content-box-focus">
+                    <div className="box-content grid grid-cols-[1fr_200px] gap-4"  data-source="content-box-focus">
 
                         {/* ===== BÀI CHÍNH ===== */}
                         {focusNews[0] && (
@@ -495,7 +495,7 @@ export default function Detail() {
                                     </figure>
                                 )}
 
-                                <h2 className="story__heading">
+                                <h2 className="story__heading font-bold text-xl mb-1">
                                     <Link
                                         className="cms-link"
                                         to={`/detail?link=${encodeURIComponent(focusNews[0].link)}`}
@@ -506,7 +506,7 @@ export default function Detail() {
                                 </h2>
 
                                 {focusNews[0].time && (
-                                    <time className="story__time">
+                                    <time className="story__time text-sm text-gray-500 mb-1">
                                         {focusNews[0].time}
                                     </time>
                                 )}
@@ -520,8 +520,8 @@ export default function Detail() {
                         )}
 
                         {/* ===== DANH SÁCH BÊN PHẢI ===== */}
-                        <div className="feature">
-                            {focusNews.slice(1).map((item, idx) => (
+                        <div className="feature flex gap-3 flex-col">
+                            {focusNews.slice(3).map((item, idx) => (
                                 <article className="story" key={idx}>
                                     {item.image && (
                                         <figure className="story__thumb">
@@ -538,27 +538,20 @@ export default function Detail() {
                                         </figure>
                                     )}
 
-                                    <h2 className="story__heading">
-                                        <Link
-                                            className="cms-link"
-                                            to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                            title={item.title}
-                                        >
+                                    <h2 className="story__heading text-lg font-semibold leading-snug line-clamp-2">
+                                        <Link className="cms-link" to={`/detail?link=${encodeURIComponent(item.link)}`}
+                                            title={item.title}>
                                             {item.title}
                                         </Link>
                                     </h2>
 
                                     {item.time && (
-                                        <time className="story__time">
+                                        <time className="story__time text-sm text-gray-500">
                                             {item.time}
                                         </time>
                                     )}
 
-                                    {item.summary && (
-                                        <div className="story__summary story__shorten">
-                                            <p>{item.summary}</p>
-                                        </div>
-                                    )}
+
                                 </article>
                             ))}
                         </div>
@@ -568,34 +561,27 @@ export default function Detail() {
 
             {/* ===== TIN NỔI BẬT (CLONE WEB THẬT) ===== */}
             {highlightNews.length > 0 && (
-                <section className="special-news swiper mt-10">
+                <section className="special-news swiper mt-10 ">
                     {/* ===== HEADING ===== */}
                     <div className="box-heading mb-4 flex items-center justify-between">
                         <h3 className="wrap-heading">
-                <span className="heading text-xl font-bold text-red-700">
-                    Tin nổi bật
-                </span>
+                            <span className="heading text-xl font-bold text-red-700">
+                                Tin nổi bật
+                            </span>
                         </h3>
                     </div>
-
-                    <Swiper
-                        modules={[Navigation, Pagination]}
-                        spaceBetween={24}
-                        navigation
-                        pagination={{ clickable: true }}
-                        breakpoints={{
+                    <Swiper modules={[Navigation, Pagination]} spaceBetween={24} navigation pagination={{ clickable: true }} breakpoints={{
                             0: { slidesPerView: 1.2 },
                             640: { slidesPerView: 2.2 },
                             1024: { slidesPerView: 4 },
                         }}
-                        className="box-content"
-                    >
+                        className="box-content">
                         {highlightNews.map((item, idx) => (
                             <SwiperSlide key={idx}>
                                 <article className="story h-full group bg-white rounded shadow-sm hover:shadow-md transition">
 
                                     {/* ===== THUMB ===== */}
-                                    <figure className="story__thumb overflow-hidden rounded-t">
+                                    <figure className="story__thumb overflow-hidden rounded-t ">
                                         <Link
                                             className="cms-link block"
                                             to={`/detail?link=${encodeURIComponent(item.link)}`}
@@ -609,13 +595,13 @@ export default function Detail() {
                                                     className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-300"
                                                 />
                                             ) : (
-                                                <div className="w-full h-44 bg-gray-200" />
+                                                <div className="w-full h-44 bg-gray-200 " />
                                             )}
                                         </Link>
                                     </figure>
 
                                     {/* ===== CONTENT ===== */}
-                                    <div className="p-4 flex flex-col gap-2">
+                                    <div className="p-4 flex flex-col gap-2 ">
 
                                         {/* CATEGORY */}
                                         {item.category && (
@@ -658,9 +644,7 @@ export default function Detail() {
                     {/* HEADING */}
                     <div className="box-heading mb-4">
                         <h3 className="wrap-heading">
-        <span className="heading text-2xl font-bold border-l-4 border-red-600 pl-3">
-          Đừng bỏ lỡ
-        </span>
+                            <span className="heading text-2xl font-bold border-l-4 border-red-600 pl-3">Đừng bỏ lỡ</span>
                         </h3>
                     </div>
 
