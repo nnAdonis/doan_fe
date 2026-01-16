@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
 import { getRss } from "../services/rssService";
 import { menuData } from "../data/menu";
+import AdsLeft from "../components/AdsLeft.tsx";
 
 /* ================= MENU / DANH MỤC ================= */
 type MenuItem = {
@@ -105,68 +106,73 @@ export function Search() {
     }, [query, news]);
 
     return (
-        <div className="max-w-[1200px] mx-auto px-4 mt-6 container">
-            <h1 className="mb-4 font-semibold">
-                {query ? `Kết quả tìm kiếm "${query}": ${filteredNews.length} bài viết` : `Có ${news.length} bài viết`}
-            </h1>
+        <div className={`container`}>
+            <div className=" px-4 mt-6 grid grid-cols-[1fr_300px] gap-4 ">
+                <div>
+                    <h1 className="mb-4 font-semibold">
+                        {query ? `Kết quả tìm kiếm "${query}": ${filteredNews.length} bài viết` : `Có ${news.length} bài viết`}
+                    </h1>
 
-            {loading && <p>Đang tải...</p>}
-            {!loading && query && filteredNews.length === 0 && (
-                <p>Không tìm thấy bài viết nào với từ khóa "{query}"</p>
-            )}
-            {!loading && !query && news.length === 0 && <p>Không có bài viết</p>}
+                    {loading && <p>Đang tải...</p>}
+                    {!loading && query && filteredNews.length === 0 && (
+                        <p>Không tìm thấy bài viết nào với từ khóa "{query}"</p>
+                    )}
+                    {!loading && !query && news.length === 0 && <p>Không có bài viết</p>}
 
-            <div className="flex">
-                {/* ================= CỘT TRÁI ================= */}
-                <div className="flex-1">
-                    {/* ===== LIST ===== */}
-                    <div className="grid gap-6">
-                        {(query ? filteredNews : news).map((item, idx) => (
-                            <article
-                                key={idx}
-                                className="grid grid-cols-[240px_1fr] gap-4"
-                            >
-                                <Link
-                                    to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                    className="block"
-                                >
-                                    {item.image ? (
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="w-full h-[140px] object-cover rounded hover:scale-105 transition"
-                                        />
-                                    ) : (
-                                        <div className="w-full h-[140px] bg-gray-200 rounded" />
-                                    )}
-                                </Link>
-
-                                <div className="flex flex-col gap-1">
-                                    <h3 className="font-semibold text-sm line-clamp-2">
+                    <div className="flex">
+                        {/* ================= CỘT TRÁI ================= */}
+                        <div className="flex-1">
+                            {/* ===== LIST ===== */}
+                            <div className="grid gap-6">
+                                {(query ? filteredNews : news).map((item, idx) => (
+                                    <article
+                                        key={idx}
+                                        className="grid grid-cols-[240px_1fr] gap-4"
+                                    >
                                         <Link
                                             to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                            className="hover:text-red-700"
+                                            className="block"
                                         >
-                                            {item.title}
+                                            {item.image ? (
+                                                <img
+                                                    src={item.image}
+                                                    alt={item.title}
+                                                    className="w-full h-[140px] object-cover rounded hover:scale-105 transition"
+                                                />
+                                            ) : (
+                                                <div className="w-full h-[140px] bg-gray-200 rounded" />
+                                            )}
                                         </Link>
-                                    </h3>
 
-                                    {item.time && (
-                                        <time className="text-xs text-gray-500">
-                                            {item.time}
-                                        </time>
-                                    )}
+                                        <div className="flex flex-col gap-1">
+                                            <h3 className="font-semibold text-sm line-clamp-2">
+                                                <Link
+                                                    to={`/detail?link=${encodeURIComponent(item.link)}`}
+                                                    className="hover:text-red-700"
+                                                >
+                                                    {item.title}
+                                                </Link>
+                                            </h3>
 
-                                    {item.summary && (
-                                        <p className="text-xs text-gray-600 line-clamp-2">
-                                            {item.summary}
-                                        </p>
-                                    )}
-                                </div>
-                            </article>
-                        ))}
+                                            {item.time && (
+                                                <time className="text-xs text-gray-500">
+                                                    {item.time}
+                                                </time>
+                                            )}
+
+                                            {item.summary && (
+                                                <p className="text-xs text-gray-600 line-clamp-2">
+                                                    {item.summary}
+                                                </p>
+                                            )}
+                                        </div>
+                                    </article>
+                                ))}
+                            </div>
+                        </div>
                     </div>
                 </div>
+                <AdsLeft/>
             </div>
         </div>
     );
