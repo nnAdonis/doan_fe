@@ -11,15 +11,9 @@ export default function RelatedArticles({ items }: { items: any[] }) {
 
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {items.map(item => (
-                    <Link
-                        key={item.link}
-                        to={`/detail?link=${encodeURIComponent(item.link)}`}
-                        className="block p-3 border rounded hover:shadow"
-                    >
+                    <Link key={item.link} to={`/detail?link=${encodeURIComponent(item.link)}`} className="block p-3 border rounded hover:shadow">
                         {item.thumb && (
-                            <img
-                                src={item.thumb}
-                                className="w-full h-36 object-cover rounded mb-2"
+                            <img src={item.thumb} className="w-full h-36 object-cover rounded mb-2"
                             />
                         )}
                         <h4 className="text-sm font-semibold line-clamp-2">

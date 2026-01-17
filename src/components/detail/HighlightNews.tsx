@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import { getSlugFromUrl } from "../../utils/getSlugFromUrl";
+import {Link} from "react-router-dom";
+import {Swiper, SwiperSlide} from "swiper/react";
+import {Navigation, Pagination} from "swiper/modules";
+import {getSlugFromUrl} from "../../utils/getSlugFromUrl";
 
 interface HighlightNewsItem {
     title: string;
@@ -14,7 +14,7 @@ interface HighlightNewsItem {
     };
 }
 
-export default function HighlightNews({ items }: { items: HighlightNewsItem[] }) {
+export default function HighlightNews({items}: { items: HighlightNewsItem[] }) {
     if (!items || items.length === 0) return null;
 
     return (
@@ -28,38 +28,23 @@ export default function HighlightNews({ items }: { items: HighlightNewsItem[] })
                 </h3>
             </div>
 
-            <Swiper
-                modules={[Navigation, Pagination]}
-                spaceBetween={24}
-                navigation
-                pagination={{ clickable: true }}
-                breakpoints={{
-                    0: { slidesPerView: 1.2 },
-                    640: { slidesPerView: 2.2 },
-                    1024: { slidesPerView: 4 },
-                }}
-                className="box-content"
-            >
+            <Swiper modules={[Navigation, Pagination]} spaceBetween={24} navigation pagination={{clickable: true}}
+                    breakpoints={{
+                        0: {slidesPerView: 1.2},
+                        640: {slidesPerView: 2.2},
+                        1024: {slidesPerView: 4},
+                    }}
+                    className="box-content">
                 {items.map(item => (
                     <SwiperSlide key={item.link}>
                         <article className="story h-full group bg-white rounded shadow-sm hover:shadow-md transition">
-
                             {/* ===== THUMB ===== */}
                             <figure className="story__thumb overflow-hidden rounded-t">
-                                <Link
-                                    to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                    title={item.title}
-                                    className="block"
-                                >
+                                <Link to={`/detail?link=${encodeURIComponent(item.link)}`} title={item.title} className="block">
                                     {item.image ? (
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            loading="lazy"
-                                            className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-300"
-                                        />
+                                        <img src={item.image} alt={item.title} loading="lazy" className="w-full h-44 object-cover group-hover:scale-105 transition-transform duration-300"/>
                                     ) : (
-                                        <div className="w-full h-44 bg-gray-200" />
+                                        <div className="w-full h-44 bg-gray-200"/>
                                     )}
                                 </Link>
                             </figure>
@@ -69,20 +54,14 @@ export default function HighlightNews({ items }: { items: HighlightNewsItem[] })
 
                                 {/* CATEGORY */}
                                 {item.category && (
-                                    <Link
-                                        to={`/category/${getSlugFromUrl(item.category.link)}`}
-                                        className="text-xs font-semibold uppercase text-red-600 hover:underline"
-                                    >
+                                    <Link to={`/category/${getSlugFromUrl(item.category.link)}`} className="text-xs font-semibold uppercase text-red-600 hover:underline">
                                         {item.category.title}
                                     </Link>
                                 )}
 
                                 {/* TITLE */}
                                 <h3 className="text-sm font-semibold leading-snug line-clamp-3">
-                                    <Link
-                                        to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                        className="hover:text-red-700 transition"
-                                    >
+                                    <Link to={`/detail?link=${encodeURIComponent(item.link)}`} className="hover:text-red-700 transition">
                                         {item.title}
                                     </Link>
                                 </h3>

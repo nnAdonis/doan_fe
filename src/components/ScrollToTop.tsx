@@ -10,7 +10,6 @@ const ScrollToTop = () => {
             behavior: "smooth",
         });
     }, [pathname, search]);
-
     return null;
 };
 
