@@ -33,9 +33,6 @@ const MENU_LIST: Record<string, { rss: string; title: string }> = {
 // ===== COMPONENT =====
 export default function Home() {
     const [news, setNews] = useState<NewsItem[]>([]);
-    // const [hotEvents, setHotEvents] = useState<HotEvent[]>([]);
-    const [events, setEvents] = useState<{ title: string; link: string }[]>([]);
-    const [loadingEvents, setLoadingEvents] = useState(true);
     const [menuNews, setMenuNews] = useState<Record<string, NewsItem[]>>({});
 
     // ===== LẤY TIN TRANG CHỦ =====
@@ -46,12 +43,7 @@ export default function Home() {
     }, []);
 
     /* ===== EVENTS ===== */
-    useEffect(() => {
-        fetch("http://localhost:3000/api/events")
-            .then(res => res.json())
-            .then(setEvents)
-            .finally(() => setLoadingEvents(false));
-    }, []);
+
 
     // ===== LẤY TIN 12 MENU =====
     useEffect(() => {
@@ -73,39 +65,7 @@ export default function Home() {
     const topNews = news.slice(0, 5); // 1 bài lớn + 4 bài nhỏ
 
     return (
-        <div className="max-w-6xl mx-auto px-4 mt-6">
-            {/* ===== SỰ KIỆN ===== */}
-            {loadingEvents ? (
-                <div className="text-gray-500 text-sm italic">
-                    Đang tải sự kiện...
-                </div>
-            ) : events.length > 0 ? (
-                <div className="event-wrapper mb-6">
-                    <div className="flex items-center gap-4">
-                        <h3 className="text-xl font-bold text-red-700 whitespace-nowrap">
-                            Sự kiện
-                        </h3>
-
-                        <div className="event-slide overflow-hidden w-full">
-                            <ul className="event-track flex gap-8">
-                                {[...events, ...events].map((e, i) => (
-                                    <li key={i} className="whitespace-nowrap">
-                                        <Link
-                                            to={`/chu-de?link=${encodeURIComponent(
-                                                e.link
-                                            )}`}
-                                            className="font-semibold text-blue-700 hover:underline"
-                                        >
-                                            #{e.title}
-                                        </Link>
-                                    </li>
-                                ))}
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            ) : null}
-
+        <div className="max-w-6xl mx-auto px-4 mt-6 container">
             {/* ===== HOTNEWS / TIN NỔI BẬT ===== */}
             <div className="abf-homepage mb-8">
                 <div className="top-news grid grid-cols-1 md:grid-cols-[4.5fr_1fr] gap-6 mb-6">
@@ -199,7 +159,7 @@ export default function Home() {
             <Banner images={[
                 "https://cdn.giaoducthoidai.vn/images/d7e5dade6c26bca1d90c2e8fb2faee186e8524fa74c9062767df0100094b01a1f566b40b5d666d6e9872c56c6b33229d/daihoi-14-pc.png"
             ]}
-                    className={`mb-6 mr-6 ml-6`}
+                className={`mb-6 mr-6 ml-6`}
             />
 
             {/* ===== HOTNEWS / TIN NỔI BẬT ===== */}

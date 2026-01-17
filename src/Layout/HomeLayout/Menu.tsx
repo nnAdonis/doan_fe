@@ -6,13 +6,13 @@ export default function Menu() {
     return (
         <nav className="bg-[#c31e40] text-white text-[14px]">
             <div className="container mx-auto">
-                <ul className="flex items-center h-10">
+                <ul className="flex items-center justify-between h-10">
 
                     {/* HOME */}
                     <li className="h-10 flex items-center">
                         <Link
                             to="/"
-                            className="px-3 flex items-center hover:bg-[#a91833]"
+                            className="px-3 flex items-center hover:bg-red-300"
                         >
                             <FaHome />
                         </Link>
@@ -29,8 +29,9 @@ export default function Menu() {
                                 className="
                                     px-3 h-10 flex items-center
                                     font-medium
-                                    hover:bg-[#a91833]
+                                    hover:bg-red-300
                                     whitespace-nowrap
+
                                 "
                             >
                                 {item.title}
@@ -41,6 +42,7 @@ export default function Menu() {
                                 <ul
                                     className="
                                         absolute left-0 top-full
+
                                         bg-white text-black
                                         min-w-[220px]
                                         shadow-lg
