@@ -56,16 +56,18 @@ const HeadHome = () => {
             </div>
 
             {/* ================= LOGO + SEARCH ================= */}
-            <div className="container py-3 mt-4 m-4">
+            <div className="container py-3 mt-4  m-4">
                 <div className="flex justify-between">
                     <Link to="/">
+
                         <img
                             src="https://cdn.giaoducthoidai.vn/assets/web/styles/img/logo.svg"
                             alt="Logo"
                             className="w-40"
                         />
+
                     </Link>
-                    <div className={`flex justify-end items-end gap-5 pt-5`}>
+                    <div className={`flex justify-end items-center gap-5 pt-5`}>
                         <div className="relative">
                             <input
                                 disabled
@@ -77,23 +79,25 @@ const HeadHome = () => {
                                 size={18}
                             />
                         </div>
-
+                        
                         <img
                             className="w-20 h-7"
                             src="https://cdn.giaoducthoidai.vn/assets/web/styles/img/gdtd.png"
                             alt=""
                         />
+
                     </div>
+
                 </div>
 
 
                 {/* DARK / LIGHT BUTTON */}
                 <header className="header">
                     <button onClick={toggleTheme}>
-                        {dark ? "☀️" : "🌙"}
-                    </button>
+                    {dark ? "☀️" : "🌙"}
+                </button>
 
-                    <input className="search-input" />
+
                 </header>
 
             </div>
@@ -101,7 +105,11 @@ const HeadHome = () => {
             {/* ================= MENU (DROPDOWN) ================= */}
             <Menu />
         </>
+
     );
+
+
 };
+
 
 export default HeadHome;
