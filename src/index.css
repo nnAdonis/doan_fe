@@ -180,3 +180,14 @@ body {
 
 
 
+<<<<<<< HEAD
+=======
+.menu {
+    background: var(--menu);
+}
+
+.main-content,
+.sidebar {
+    background: var(--box);
+}
+>>>>>>> cf5ba06b20dd0d61f05f58f277b47e5dcc5a2359
