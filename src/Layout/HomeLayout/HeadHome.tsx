@@ -3,6 +3,7 @@ import { FaSearch } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import Menu from "./Menu";
 import { useTheme } from "../../hooks/useTheme";
+import { VoiceSearchButton } from "../../components/VoiceSearchButton";
 
 
 const HeadHome = () => {
@@ -80,21 +81,32 @@ const HeadHome = () => {
                         />
                     </Link>
                     <div className={`flex justify-end items-end gap-5 pt-5`}>
-                        <div className="relative">
+                        <div className="relative flex items-center gap-2">
                             <input
                                 type="text"
                                 value={searchQuery}
                                 onChange={(e) => setSearchQuery(e.target.value)}
                                 onKeyDown={handleKeyDown}
                                 placeholder="Tìm kiếm..."
-                                className="bg-[#f5f5f5] h-10 w-56 border border-gray-300 rounded-full pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-red-500"
+                                className="bg-[#f5f5f5] h-10 w-56 border border-gray-300 rounded-full pl-4 pr-20 focus:outline-none focus:ring-2 focus:ring-red-500"
                             />
-                            <FaSearch
-                                onClick={handleSearch}
-                                className="absolute right-4 top-2.5 cursor-pointer hover:scale-110 transition-transform"
-                                color="#c31e40"
-                                size={18}
-                            />
+                            <div className="absolute right-2 flex items-center gap-1">
+                                <VoiceSearchButton
+                                    onTranscript={(text) => {
+                                        setSearchQuery(text);
+                                        // Tự động tìm kiếm sau khi nhận được transcript
+                                        setTimeout(() => {
+                                            navigate(`/search?q=${encodeURIComponent(text.trim())}`);
+                                        }, 300);
+                                    }}
+                                />
+                                <FaSearch
+                                    onClick={handleSearch}
+                                    className="cursor-pointer hover:scale-110 transition-transform"
+                                    color="#c31e40"
+                                    size={18}
+                                />
+                            </div>
                         </div>
 
                         <img

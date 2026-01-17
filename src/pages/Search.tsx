@@ -28,8 +28,7 @@ function removeVietnameseDiacritics(str: string): string {
 function getAllSlugs(items: MenuItem[]): string[] {
     const slugs: string[] = [];
     
-    console.log("getAllSlugs - items:", items);
-    
+
     for (const item of items) {
         if (item && item.slug) {
             slugs.push(item.slug);
@@ -43,7 +42,6 @@ function getAllSlugs(items: MenuItem[]): string[] {
         }
     }
     
-    console.log("getAllSlugs - result:", slugs);
     return slugs;
 }
 
@@ -60,12 +58,10 @@ export function Search() {
         
         // Lấy tất cả slugs từ menuData
         const allSlugs = getAllSlugs(menuData as MenuItem[]);
-        console.log("allSlugs", allSlugs);
-        
+
         // Lấy RSS từ tất cả các slug trong menuData
         const rssUrls = allSlugs.map(slug => rssFromSlug(slug));
-        console.log("rssUrls", rssUrls);
-        
+
         // Gọi getRss cho tất cả các RSS feeds và gộp kết quả
         Promise.all(rssUrls.map(url => getRss(url)))
             .then(results => {
@@ -120,25 +116,15 @@ export function Search() {
                     {!loading && !query && news.length === 0 && <p>Không có bài viết</p>}
 
                     <div className="flex">
-                        {/* ================= CỘT TRÁI ================= */}
                         <div className="flex-1">
                             {/* ===== LIST ===== */}
                             <div className="grid gap-6">
                                 {(query ? filteredNews : news).map((item, idx) => (
-                                    <article
-                                        key={idx}
-                                        className="grid grid-cols-[240px_1fr] gap-4"
-                                    >
-                                        <Link
-                                            to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                            className="block"
-                                        >
+                                    <article key={idx} className="grid grid-cols-[240px_1fr] gap-4">
+                                        <Link to={`/detail?link=${encodeURIComponent(item.link)}`} className="block">
                                             {item.image ? (
-                                                <img
-                                                    src={item.image}
-                                                    alt={item.title}
-                                                    className="w-full h-[140px] object-cover rounded hover:scale-105 transition"
-                                                />
+                                                <img src={item.image} alt={item.title}
+                                                    className="w-full h-[140px] object-cover rounded hover:scale-105 transition"/>
                                             ) : (
                                                 <div className="w-full h-[140px] bg-gray-200 rounded" />
                                             )}
@@ -146,14 +132,11 @@ export function Search() {
 
                                         <div className="flex flex-col gap-1">
                                             <h3 className="font-semibold text-sm line-clamp-2">
-                                                <Link
-                                                    to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                                    className="hover:text-red-700"
-                                                >
+                                                <Link to={`/detail?link=${encodeURIComponent(item.link)}`}
+                                                      className="hover:text-red-700">
                                                     {item.title}
                                                 </Link>
                                             </h3>
-
                                             {item.time && (
                                                 <time className="text-xs text-gray-500">
                                                     {item.time}
