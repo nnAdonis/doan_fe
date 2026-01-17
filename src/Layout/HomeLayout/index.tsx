@@ -4,6 +4,8 @@ import Banner from "./Banner";
 import { Outlet } from "react-router-dom";
 import SeeMore from "../../components/SeeMore.tsx";
 import CateList from "../../components/CateList.tsx";
+import AdsPopup from "../../components/AdsPopup.tsx";
+import Event from "../../components/Event.tsx";
 
 const HomeLayout = () => {
     return (
@@ -14,6 +16,7 @@ const HomeLayout = () => {
                 "https://cdn.giaoducthoidai.vn/images/cac98c2b2a991251162463eef8505ad49331570b927193522e9ad29f51e8fd01db0230d604072c709f7b416fb3f9b0bf/banner-dh-vanhien-fnx2.png",
             ]} className={`container`}
             />
+            <Event/>
             <main className="container mx-auto mt-6">
                 <Outlet />
             </main>
@@ -23,6 +26,7 @@ const HomeLayout = () => {
             />
             <SeeMore/>
             <CateList/>
+            <AdsPopup/>
             <FooterHome />
         </>
     );

@@ -6,3 +6,4 @@ export function getSlugFromUrl(url: string) {
         return "";
     }
 }
+

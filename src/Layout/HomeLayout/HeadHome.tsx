@@ -1,13 +1,27 @@
 import { useEffect, useState } from "react";
 import { FaSearch } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Menu from "./Menu";
 import { useTheme } from "../../hooks/useTheme";
 
 
 const HeadHome = () => {
     const [time, setTime] = useState("");
+    const [searchQuery, setSearchQuery] = useState("");
     const { dark, toggleTheme } = useTheme();
+    const navigate = useNavigate();
+
+    const handleSearch = () => {
+        if (searchQuery.trim()) {
+            navigate(`/search?q=${encodeURIComponent(searchQuery.trim())}`);
+        }
+    };
+
+    const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+        if (e.key === "Enter") {
+            handleSearch();
+        }
+    };
 
     useEffect(() => {
         const timer = setInterval(() => {
@@ -68,11 +82,16 @@ const HeadHome = () => {
                     <div className={`flex justify-end items-end gap-5 pt-5`}>
                         <div className="relative">
                             <input
-                                disabled
-                                className="bg-[#f5f5f5] h-10 w-56 border border-gray-300 rounded-full pl-4"
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                onKeyDown={handleKeyDown}
+                                placeholder="Tìm kiếm..."
+                                className="bg-[#f5f5f5] h-10 w-56 border border-gray-300 rounded-full pl-4 pr-10 focus:outline-none focus:ring-2 focus:ring-red-500"
                             />
                             <FaSearch
-                                className="absolute right-4 top-2.5"
+                                onClick={handleSearch}
+                                className="absolute right-4 top-2.5 cursor-pointer hover:scale-110 transition-transform"
                                 color="#c31e40"
                                 size={18}
                             />
