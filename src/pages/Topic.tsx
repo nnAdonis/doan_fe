@@ -37,7 +37,6 @@ export default function Topic() {
             .finally(() => setLoading(false));
     }, [link]);
 
-    /* ===== LOADING ===== */
     if (loading) {
         return (
             <div className="text-center py-10 text-gray-500">
@@ -46,7 +45,6 @@ export default function Topic() {
         );
     }
 
-    /* ===== ERROR ===== */
     if (!data || !Array.isArray(data.articles)) {
         return (
             <div className="text-center py-10 text-red-600">

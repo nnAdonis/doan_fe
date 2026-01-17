@@ -144,11 +144,9 @@ export default function Detail() {
 
     useEffect(() => {
         let mounted = true;
-
         getRss("https://giaoducthoidai.vn/rss/home.rss")
             .then((list) => {
                 if (!mounted) return;
-
                 setFocusNews(list.slice(0, 6));        // Tin tiêu điểm
                 setHighlightNews(list.slice(6, 14));   // Tin nổi bật
                 setRelatedNews(list.slice(14, 20));    // Dành cho bạn
@@ -156,7 +154,6 @@ export default function Detail() {
             })
             .catch(() => {
                 if (!mounted) return;
-
                 setFocusNews([]);
                 setHighlightNews([]);
                 setRelatedNews([]);
@@ -168,8 +165,6 @@ export default function Detail() {
         };
     }, []);
 
-    // Extract text từ HTML để dùng cho text-to-speech
-    // Phải đặt trước các early returns để tuân thủ Rules of Hooks
     const articleText = useMemo(() => {
         if (!data || typeof document === 'undefined') return '';
         
@@ -190,7 +185,6 @@ export default function Detail() {
             </p>
         );
     }
-
     if (error) {
         return (
             <p className="text-center py-10 text-red-600">
@@ -198,41 +192,32 @@ export default function Detail() {
             </p>
         );
     }
-
     if (!data) return null;
 
     return (
         <div className="container mx-auto px-4">
             <div className="grid grid-cols-12 gap-8">
 
-            {/* ================= MAIN CONTENT ================= */}
                 <article className="col-span-12 lg:col-span-8 bg-white p-6 rounded shadow">
                     <ArticleHeader data={data} />
 
-                    {/* ===== TEXT TO SPEECH BUTTON ===== */}
                     <div className="mb-4">
                         <TextToSpeechButton text={articleText} />
                     </div>
 
                     <ArticleContent html={data.content} />
 
-                    {/* ================= DÀNH CHO BẠN ================= */}
                     <ForYouSlider items={relatedNews} />
 
-                    {/* ================= VIDEO QUẢNG CÁO (MOCK UI) ================= */}
                     <VideoAd />
 
-                    {/* =================  ================= */}
                     <TagList tags={data.tags ?? []} />
 
-                    {/* ================= TIN LIÊN QUAN ================= */}
                     <RelatedArticles items={data.related ?? []} />
 
-                    {/* ===== COMMENTS ===== */}
                     {data.comments && (
                         <section className="mt-10 border-t pt-6">
 
-                            {/* USER BAR */}
                             {user && (
                                 <div className="flex items-center justify-between mb-4 p-3 bg-gray-100 rounded">
                 <span className="text-sm">
