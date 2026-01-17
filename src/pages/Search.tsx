@@ -28,8 +28,7 @@ function removeVietnameseDiacritics(str: string): string {
 function getAllSlugs(items: MenuItem[]): string[] {
     const slugs: string[] = [];
     
-    console.log("getAllSlugs - items:", items);
-    
+
     for (const item of items) {
         if (item && item.slug) {
             slugs.push(item.slug);
@@ -43,7 +42,6 @@ function getAllSlugs(items: MenuItem[]): string[] {
         }
     }
     
-    console.log("getAllSlugs - result:", slugs);
     return slugs;
 }
 
@@ -60,12 +58,10 @@ export function Search() {
         
         // Lấy tất cả slugs từ menuData
         const allSlugs = getAllSlugs(menuData as MenuItem[]);
-        console.log("allSlugs", allSlugs);
-        
+
         // Lấy RSS từ tất cả các slug trong menuData
         const rssUrls = allSlugs.map(slug => rssFromSlug(slug));
-        console.log("rssUrls", rssUrls);
-        
+
         // Gọi getRss cho tất cả các RSS feeds và gộp kết quả
         Promise.all(rssUrls.map(url => getRss(url)))
             .then(results => {

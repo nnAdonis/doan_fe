@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getDetail, getRss } from "../services/rssService";
 import Comments from "../components/Comments";
@@ -13,6 +13,7 @@ import SameCategory from "../components/detail/SameCategory";
 import FocusNews from "../components/detail/FocusNews";
 import HighlightNews from "../components/detail/HighlightNews";
 import LatestNews from "../components/detail/LatestNews";
+import { TextToSpeechButton } from "../components/TextToSpeechButton";
 
 /* ================= TYPES ================= */
 interface HotEvent {
@@ -167,6 +168,21 @@ export default function Detail() {
         };
     }, []);
 
+    // Extract text từ HTML để dùng cho text-to-speech
+    // Phải đặt trước các early returns để tuân thủ Rules of Hooks
+    const articleText = useMemo(() => {
+        if (!data || typeof document === 'undefined') return '';
+        
+        const tempDiv = document.createElement('div');
+        const fullText = [
+            data.title,
+            data.sapo || '',
+            data.content || ''
+        ].filter(Boolean).join(' ');
+        tempDiv.innerHTML = fullText;
+        return tempDiv.textContent || tempDiv.innerText || '';
+    }, [data]);
+
     if (loading) {
         return (
             <p className="text-center py-10 text-gray-500">
@@ -192,6 +208,11 @@ export default function Detail() {
             {/* ================= MAIN CONTENT ================= */}
                 <article className="col-span-12 lg:col-span-8 bg-white p-6 rounded shadow">
                     <ArticleHeader data={data} />
+
+                    {/* ===== TEXT TO SPEECH BUTTON ===== */}
+                    <div className="mb-4">
+                        <TextToSpeechButton text={articleText} />
+                    </div>
 
                     <ArticleContent html={data.content} />
 
