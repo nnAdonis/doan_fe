@@ -85,22 +85,16 @@ const HeadHome = () => {
                         />
                     </div>
                 </div>
-                <button
-                    onClick={toggleTheme}
-                    className="
-    text-xl
-    w-9 h-9
-    flex items-center justify-center
-    rounded-full
-    bg-gray-200
-    dark:bg-gray-700
-    hover:scale-110
-    transition
-  "
-                    title="Chuyển Dark / Light"
-                >
-                    {dark ? "☀️" : "🌙"}
-                </button>
+
+
+                {/* DARK / LIGHT BUTTON */}
+                <header className="header">
+                    <button onClick={toggleTheme}>
+                        {dark ? "☀️" : "🌙"}
+                    </button>
+
+                    <input className="search-input" />
+                </header>
 
             </div>
 
