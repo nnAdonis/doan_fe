@@ -8,13 +8,7 @@ export default function TagList({ tags }: { tags: any[] }) {
             </h3>
             <div className="flex flex-wrap gap-2">
                 {tags.map(tag => (
-                    <a
-                        key={tag.link}
-                        href={tag.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200"
-                    >
+                    <a key={tag.link} href={tag.link} target="_blank" rel="noreferrer" className="px-3 py-1 bg-gray-100 rounded text-sm hover:bg-gray-200">
                         #{tag.title}
                     </a>
                 ))}

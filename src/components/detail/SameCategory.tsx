@@ -11,16 +11,9 @@ export default function SameCategory({ items }: { items: any[] }) {
 
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                 {items.map(item => (
-                    <Link
-                        key={item.link}
-                        to={`/detail?link=${encodeURIComponent(item.link)}`}
-                        className="block"
-                    >
+                    <Link key={item.link} to={`/detail?link=${encodeURIComponent(item.link)}`} className="block">
                         {item.thumb && (
-                            <img
-                                src={item.thumb}
-                                className="w-full h-32 object-cover rounded"
-                            />
+                            <img src={item.thumb} className="w-full h-32 object-cover rounded"/>
                         )}
                         <h4 className="mt-2 text-sm font-medium line-clamp-2">
                             {item.title}

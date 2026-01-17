@@ -63,8 +63,6 @@ function getChildCategories(slug: string, map: Record<string, Category>) {
         }));
 }
 
-
-
 export function Category() {
     const {slug} = useParams();
     const navigate = useNavigate();
@@ -105,10 +103,7 @@ export function Category() {
                 <div className="mb-4 text-sm text-gray-600">
                     {parent && (
                         <>
-                            <Link
-                                to={`/category/${category.parent}`}
-                                className="hover:underline text-[20px] font-bold"
-                            >
+                            <Link to={`/category/${category.parent}`} className="hover:underline text-[20px] font-bold">
                                 {parent.title}
                             </Link>
                             <span className="mx-2">›</span>
@@ -126,9 +121,7 @@ export function Category() {
 
                         <ul className="flex gap-3 relative top-1.5">
                             {childCategories.map((item) => (
-                                <li key={item.key}
-                                    onClick={() => navigate(`/category/${item.key}`)}
-                                    className="cursor-pointer hover:text-red-600">
+                                <li key={item.key} onClick={() => navigate(`/category/${item.key}`)} className="cursor-pointer hover:text-red-600">
                                     {item.title}
                                 </li>
                             ))}
@@ -146,16 +139,9 @@ export function Category() {
                         {/* ===== LIST ===== */}
                         {featured && (
                             <article className="mb-6">
-                                <Link
-                                    to={`/detail?link=${encodeURIComponent(featured.link)}`}
-                                    className="block"
-                                >
+                                <Link to={`/detail?link=${encodeURIComponent(featured.link)}`} className="block">
                                     {featured.image && (
-                                        <img
-                                            src={featured.image}
-                                            alt={featured.title}
-                                            className="w-full h-[360px] object-cover rounded"
-                                        />
+                                        <img src={featured.image} alt={featured.title} className="w-full h-[360px] object-cover rounded"/>
                                     )}
 
                                     <h2 className="mt-4 text-xl font-bold leading-snug hover:text-red-700 transition">
@@ -166,20 +152,10 @@ export function Category() {
                         )}
                         <div className="grid gap-6">
                             {news.slice(11,).map((item, idx) => (
-                                <article
-                                    key={idx}
-                                    className="grid grid-cols-[240px_1fr] gap-2  "
-                                >
-                                    <Link
-                                        to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                        className="block"
-                                    >
+                                <article key={idx} className="grid grid-cols-[240px_1fr] gap-2  ">
+                                    <Link to={`/detail?link=${encodeURIComponent(item.link)}`} className="block">
                                         {item.image ? (
-                                            <img
-                                                src={item.image}
-                                                alt={item.title}
-                                                className="w-full object-cover rounded hover:scale-105 transition"
-                                            />
+                                            <img src={item.image} alt={item.title} className="w-full object-cover rounded hover:scale-105 transition"/>
                                         ) : (
                                             <div className="w-full h-20 bg-gray-200"/>
                                         )}
@@ -187,10 +163,7 @@ export function Category() {
 
                                     <div className="flex flex-col gap-1">
                                         <h3 className="font-semibold text-sm line-clamp-2">
-                                            <Link
-                                                to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                                className="hover:text-red-700"
-                                            >
+                                            <Link to={`/detail?link=${encodeURIComponent(item.link)}`} className="hover:text-red-700">
                                                 {item.title}
                                             </Link>
                                         </h3>
@@ -222,16 +195,10 @@ export function Category() {
                             <div className="flex flex-col gap-4">
                                 {news.slice(0, 5).map((item, idx) => (
                                     <article key={idx} className="flex flex-col gap-1">
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="object-cover rounded"
+                                        <img src={item.image} alt={item.title} className="object-cover rounded"
                                         />
                                         <h3 className="text-sm font-medium line-clamp-2">
-                                            <Link
-                                                to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                                className="hover:text-red-700"
-                                            >
+                                            <Link to={`/detail?link=${encodeURIComponent(item.link)}`} className="hover:text-red-700">
                                                 {item.title}
                                             </Link>
                                         </h3>
@@ -247,16 +214,9 @@ export function Category() {
                             <div className="flex flex-col gap-4">
                                 {news.slice(5, 11).map((item, idx) => (
                                     <article key={idx} className="flex flex-col gap-1">
-                                        <img
-                                            src={item.image}
-                                            alt={item.title}
-                                            className="object-cover rounded"
-                                        />
+                                        <img src={item.image} alt={item.title} className="object-cover rounded"/>
                                         <h3 className="text-sm font-medium line-clamp-2">
-                                            <Link
-                                                to={`/detail?link=${encodeURIComponent(item.link)}`}
-                                                className="hover:text-red-700"
-                                            >
+                                            <Link to={`/detail?link=${encodeURIComponent(item.link)}`} className="hover:text-red-700">
                                                 {item.title}
                                             </Link>
                                         </h3>

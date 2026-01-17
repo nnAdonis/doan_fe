@@ -4,7 +4,6 @@ import { getRss } from "../services/rssService";
 import { menuData } from "../data/menu";
 import AdsLeft from "../components/AdsLeft.tsx";
 
-/* ================= MENU / DANH MỤC ================= */
 type MenuItem = {
     title: string;
     slug: string;
@@ -15,7 +14,6 @@ function rssFromSlug(slug: string) {
     return `https://giaoducthoidai.vn/rss/${slug}.rss`;
 }
 
-// Hàm loại bỏ dấu tiếng Việt để tìm kiếm không phân biệt có dấu/không dấu
 function removeVietnameseDiacritics(str: string): string {
     return str
         .toLowerCase()
@@ -55,20 +53,13 @@ export function Search() {
 
     useEffect(() => {
         setLoading(true);
-        
-        // Lấy tất cả slugs từ menuData
+
         const allSlugs = getAllSlugs(menuData as MenuItem[]);
 
-        // Lấy RSS từ tất cả các slug trong menuData
         const rssUrls = allSlugs.map(slug => rssFromSlug(slug));
-
-        // Gọi getRss cho tất cả các RSS feeds và gộp kết quả
         Promise.all(rssUrls.map(url => getRss(url)))
             .then(results => {
-                // Gộp tất cả bài viết lại
                 const allNews = results.flat();
-                
-                // Loại bỏ các bài viết trùng lặp dựa vào link
                 const uniqueNews = Array.from(
                     new Map(allNews.map(item => [item.link, item])).values()
                 );
@@ -82,7 +73,6 @@ export function Search() {
             .finally(() => setLoading(false));
     }, []);
 
-    // Lọc bài báo theo query khi query hoặc news thay đổi
     useEffect(() => {
         if (!query.trim()) {
             setFilteredNews(news);
@@ -93,7 +83,6 @@ export function Search() {
 
         const filtered = news.filter(item => {
             if (!item.title) return false;
-            // Tìm kiếm không phân biệt hoa thường và không phân biệt có dấu/không dấu
             const normalizedTitle = removeVietnameseDiacritics(item.title);
             return normalizedTitle.includes(normalizedQuery);
         });
