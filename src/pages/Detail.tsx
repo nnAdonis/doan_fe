@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination } from "swiper/modules";
 import { getDetail, getRss } from "../services/rssService";
 import { getSlugFromUrl } from "../utils/getSlugFromUrl";
+import { TextToSpeechButton } from "../components/TextToSpeechButton";
 
 /* ================= TYPES ================= */
 interface RelatedArticle {
@@ -167,11 +168,26 @@ export default function Detail() {
     useEffect(() => {
         getRss("https://giaoducthoidai.vn/rss/home.rss")
             .then((list) => {
-                // Lấy 6 bài đầu tiên làm “Dành cho bạn”
+                // Lấy 6 bài đầu tiên làm "Dành cho bạn"
                 setRelatedNews(list.slice(14, 20));
             })
             .catch(() => setRelatedNews([]));
     }, []);
+
+    // Extract text từ HTML để dùng cho text-to-speech
+    // Phải đặt trước các early returns để tuân thủ Rules of Hooks
+    const articleText = useMemo(() => {
+        if (!data || typeof document === 'undefined') return '';
+        
+        const tempDiv = document.createElement('div');
+        const fullText = [
+            data.title,
+            data.sapo || '',
+            data.content || ''
+        ].filter(Boolean).join(' ');
+        tempDiv.innerHTML = fullText;
+        return tempDiv.textContent || tempDiv.innerText || '';
+    }, [data]);
 
     if (loading) {
         return (
@@ -260,6 +276,11 @@ export default function Detail() {
                     {data.time && <span>{data.time}</span>}
                 </div>
             )}
+
+            {/* ===== TEXT TO SPEECH BUTTON ===== */}
+            <div className="mb-4">
+                <TextToSpeechButton text={articleText} />
+            </div>
 
             {/* ===== SAPO ===== */}
             {data.sapo && (

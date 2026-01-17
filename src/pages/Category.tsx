@@ -126,16 +126,13 @@ export function Category() {
 
                         <ul className="flex gap-3 relative top-1.5">
                             {childCategories.map((item) => (
-                                <li
-                                    key={item.key}
+                                <li key={item.key}
                                     onClick={() => navigate(`/category/${item.key}`)}
-                                    className="cursor-pointer hover:text-red-600"
-                                >
+                                    className="cursor-pointer hover:text-red-600">
                                     {item.title}
                                 </li>
                             ))}
                         </ul>
-
                     </div>
                 )}
 
