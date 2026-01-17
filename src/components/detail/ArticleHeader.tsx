@@ -1,7 +1,7 @@
-import { Link } from "react-router-dom";
-import { getSlugFromUrl } from "../../utils/getSlugFromUrl";
+import {Link} from "react-router-dom";
+import {getSlugFromUrl} from "../../utils/getSlugFromUrl";
 
-export default function ArticleHeader({ data }: { data: any }) {
+export default function ArticleHeader({data}: { data: any }) {
     return (
         <>
             {/* HOT EVENTS */}
@@ -13,11 +13,8 @@ export default function ArticleHeader({ data }: { data: any }) {
                         </h3>
                         <div className="overflow-x-auto flex gap-6 py-1">
                             {data.hotEvents.map((e: any) => (
-                                <Link
-                                    key={e.link}
-                                    to={`/chu-de?link=${encodeURIComponent(e.link)}`}
-                                    className="text-blue-700 hover:underline font-semibold"
-                                >
+                                <Link key={e.link} to={`/chu-de?link=${encodeURIComponent(e.link)}`}
+                                      className="text-blue-700 hover:underline font-semibold">
                                     #{e.title}
                                 </Link>
                             ))}
@@ -29,19 +26,14 @@ export default function ArticleHeader({ data }: { data: any }) {
             {/* BREADCRUMB */}
             {data.breadcrumb?.parent && (
                 <div className="mb-6 flex flex-wrap gap-4">
-                    <Link
-                        to={`/category/${getSlugFromUrl(data.breadcrumb.parent.link)}`}
-                        className="text-xl font-bold text-red-700"
-                    >
+                    <Link to={`/category/${getSlugFromUrl(data.breadcrumb.parent.link)}`}
+                          className="text-xl font-bold text-red-700">
                         {data.breadcrumb.parent.title}
                     </Link>
 
                     {data.breadcrumb.children?.map((child: any) => (
-                        <Link
-                            key={child.link}
-                            to={`/category/${getSlugFromUrl(child.link)}`}
-                            className="text-gray-700 font-semibold hover:text-red-700"
-                        >
+                        <Link key={child.link} to={`/category/${getSlugFromUrl(child.link)}`}
+                              className="text-gray-700 font-semibold hover:text-red-700">
                             {child.title}
                         </Link>
                     ))}
@@ -59,7 +51,7 @@ export default function ArticleHeader({ data }: { data: any }) {
             {data.sapo && (
                 <div
                     className="text-lg font-medium mb-6"
-                    dangerouslySetInnerHTML={{ __html: data.sapo }}
+                    dangerouslySetInnerHTML={{__html: data.sapo}}
                 />
             )}
         </>
