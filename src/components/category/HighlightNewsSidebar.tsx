@@ -15,7 +15,7 @@ interface HighlightNewsSidebarProps {
 export function HighlightNewsSidebar({ title, articles, sticky = false }: HighlightNewsSidebarProps) {
     return (
         <aside className={sticky ? "top-4 self-start sticky" : ""}>
-            <h2 className="font-semibold text-lg border-l-4 border-red-700 pl-3 mb-2 bg-[#f5f5f5]">
+            <h2 className="font-semibold text-lg border-l-4 border-red-700 pl-3 mb-2">
                 {title}
             </h2>
 

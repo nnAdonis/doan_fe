@@ -105,7 +105,8 @@ export default function Detail() {
     const [params] = useSearchParams();
     const link = params.get("link");
 
-    const [data, setData] = useState<ArticleDetail | null>(null);
+    const [
+        data, setData] = useState<ArticleDetail | null>(null);
     const [focusNews, setFocusNews] = useState<FocusNewsItem[]>([]);
     const [highlightNews, setHighlightNews] = useState<HighlightNewsItem[]>([]);
     const [latestNews, setLatestNews] = useState<LatestNewsItem[]>([]);
@@ -169,6 +170,7 @@ export default function Detail() {
         if (!data || typeof document === 'undefined') return '';
         
         const tempDiv = document.createElement('div');
+        tempDiv.classList.add('related-article');
         const fullText = [
             data.title,
             data.sapo || '',
@@ -198,7 +200,7 @@ export default function Detail() {
         <div className="container mx-auto px-4">
             <div className="grid grid-cols-12 gap-8">
 
-                <article className="col-span-12 lg:col-span-8 bg-white p-6 rounded shadow">
+                <article className="col-span-12 lg:col-span-8 p-6 rounded shadow">
                     <ArticleHeader data={data} />
 
                     <div className="mb-4">

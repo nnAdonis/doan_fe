@@ -23,10 +23,8 @@ function removeVietnameseDiacritics(str: string): string {
         .replace(/Đ/g, "D");
 }
 
-function getAllSlugs(items: MenuItem[]): string[] {
+function getAllSlugs(items: MenuItem[]): string[] { // lấy toàn bộ nguồn bài viết
     const slugs: string[] = [];
-    
-
     for (const item of items) {
         if (item && item.slug) {
             slugs.push(item.slug);
@@ -92,7 +90,7 @@ export function Search() {
 
     return (
         <div className={`container`}>
-            <div className=" px-4 mt-6 grid grid-cols-[1fr_300px] gap-4 ">
+            <div className="px-4 mt-6 grid grid-cols-[1fr_300px] gap-4 ">
                 <div>
                     <h1 className="mb-4 font-semibold">
                         {query ? `Kết quả tìm kiếm "${query}": ${filteredNews.length} bài viết` : `Có ${news.length} bài viết`}

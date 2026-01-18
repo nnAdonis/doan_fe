@@ -17,7 +17,6 @@ export function useTextToSpeech(): UseTextToSpeechReturn {
     const voicesLoadedRef = useRef(false);
 
     useEffect(() => {
-        // Load voices khi component mount
         const loadVoices = () => {
             if (window.speechSynthesis) {
                 const voices = window.speechSynthesis.getVoices();
@@ -27,13 +26,11 @@ export function useTextToSpeech(): UseTextToSpeechReturn {
             }
         };
 
-        // Một số trình duyệt cần event để load voices
         if (window.speechSynthesis) {
             loadVoices();
             window.speechSynthesis.onvoiceschanged = loadVoices;
         }
 
-        // Cleanup khi component unmount
         return () => {
             if (window.speechSynthesis) {
                 window.speechSynthesis.cancel();

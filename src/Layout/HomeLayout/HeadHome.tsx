@@ -41,11 +41,11 @@ const HeadHome = () => {
     return (
         <>
             {/* ================= TOP BAR ================= */}
-            <div className="bg-[#f5f5f5] text-xs py-2">
+            <div className={`${dark?'bg-gray-400':`bg-[#f5f5f5]`} text-xs py-2`}>
                 <div className="container flex gap-6 items-center">
-                    <div>{time}</div>
+                    <div className='text-black'>{time}</div>
 
-                    <div className="flex gap-1 items-center">
+                    <div className="flex gap-1 items-center text-black">
                         <img
                             src="https://cdn.giaoducthoidai.vn/assets/web/styles/img/icon-phone.svg"
                             alt=""
@@ -56,7 +56,7 @@ const HeadHome = () => {
                         </span>
                     </div>
 
-                    <div className="flex gap-1 items-center">
+                    <div className="flex gap-1 items-center text-black">
                         <img
                             src="https://cdn.giaoducthoidai.vn/assets/web/styles/img/icon-mail.svg"
                             alt=""
@@ -70,6 +70,7 @@ const HeadHome = () => {
             </div>
 
             {/* ================= LOGO + SEARCH ================= */}
+
             <div className="container py-3 mt-4 m-4">
                 <div className="flex justify-between items-center">
                     <Link to="/">
@@ -80,7 +81,17 @@ const HeadHome = () => {
                         />
                     </Link>
 
+
                     <div className="flex items-center gap-5">
+                        <header className="header mt-4">
+                            <button
+                                onClick={toggleTheme}
+                                className="text-xl w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-110 transition"
+                                title="Chuyển Dark / Light"
+                            >
+                                {dark ? "☀️" : "🌙"}
+                            </button>
+                        </header>
                         <div className="flex justify-end mt-4">
                             <div className="relative flex items-center gap-2">
                                 <input
@@ -89,7 +100,7 @@ const HeadHome = () => {
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     onKeyDown={handleKeyDown}
                                     placeholder="Tìm kiếm..."
-                                    className="bg-[#f5f5f5] h-10 w-56 border border-gray-300 rounded-full pl-4 pr-20 focus:outline-none focus:ring-2 focus:ring-red-500"
+                                    className=" h-10 w-56 border border-gray-300 rounded-full pl-4 pr-20 focus:outline-none focus:ring-2 focus:ring-red-500"
                                 />
                                 <div className="absolute right-2 flex items-center gap-1">
                                     <VoiceSearchButton
@@ -123,15 +134,7 @@ const HeadHome = () => {
                 </div>
 
                 {/* DARK / LIGHT BUTTON */}
-                <header className="header mt-4">
-                    <button
-                        onClick={toggleTheme}
-                        className="text-xl w-9 h-9 flex items-center justify-center rounded-full bg-gray-200 dark:bg-gray-700 hover:scale-110 transition"
-                        title="Chuyển Dark / Light"
-                    >
-                        {dark ? "☀️" : "🌙"}
-                    </button>
-                </header>
+
             </div>
 
             <Menu />
