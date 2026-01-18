@@ -3,7 +3,7 @@
 
 
 .container{
-    width: 1100px;
+    width: 1176px;
     padding: 0 12px;
     margin-left: auto;
     margin-right: auto;
@@ -122,6 +122,27 @@ a:hover {
 }
 
 /* LIGHT (default) */
+/* events.css */
+.event-slide {
+    overflow: hidden;
+}
+
+.event-track {
+    display: flex;
+    width: max-content;
+    animation: slideEvent 25s linear infinite;
+}
+
+@keyframes slideEvent {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+/* LIGHT MODE (default) */
 :root {
     --bg: #ffffff;
     --text: #111111;
@@ -151,7 +172,6 @@ body {
     background: var(--input-bg);
     color: var(--text);
 }
-
 
 
 

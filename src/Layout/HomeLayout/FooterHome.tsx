@@ -8,10 +8,7 @@ const Footer = () => {
                 {/* CỘT 1: LOGO → CLICK VỀ TRANG CHỦ */}
                 <div className="flex flex-col items-center text-center">
                     <Link to="/" className="flex flex-col items-center">
-                        <img
-                            src="https://cdn.giaoducthoidai.vn/assets/web/styles/img/logo.svg"
-                            alt="Logo"
-                            className="w-40 mb-3 brightness-0 invert cursor-pointer"
+                        <img src="https://cdn.giaoducthoidai.vn/assets/web/styles/img/logo.svg" alt="Logo" className="w-40 mb-3 brightness-0 invert cursor-pointer"
                         />
                         <p className="font-bold text-xl tracking-wide hover:underline">
                             BÁO GIÁO DỤC & THỜI ĐẠI

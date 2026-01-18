@@ -6,10 +6,14 @@ import "swiper/css/pagination";
 import './index.css'
 import App from './App.tsx'
 
+import { AuthProvider } from "./context/AuthContext";
+// import "./styles/theme.css";
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <App />
+      <AuthProvider>
+          <App />
+      </AuthProvider>
   </StrictMode>,
 )
